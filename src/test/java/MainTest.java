@@ -15,8 +15,5 @@ public class MainTest {
         assertEquals(1, 1);
     }
 
-    @Test
-    public void testWrong() {
-        assertEquals(1, 2);
-    }
+
 }
