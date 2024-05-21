@@ -17,13 +17,6 @@ public class Costumer extends User {
     /**
      *
      */
-    public Cart getCart() {
-        return cart;
-    }
-
-    /**
-     *
-     */
     public Costumer(String username, String name, Address adress) {
         super(username, name, adress);
         this.cart = new Cart();
@@ -35,5 +28,30 @@ public class Costumer extends User {
     public Costumer(String username, String name, Address adress, Cart card) {
         super(username, name, adress);
         this.cart = new Cart();
+    }
+
+    /**
+     *
+     */
+    public Cart getCart() {
+        return cart;
+    }
+
+    /**
+     *
+     */
+    public void addProduct(Product product, int quantity) {
+    }
+
+    /**
+     *
+     */
+    public void removeProduct(Product product, int quantity) {
+    }
+
+    /**
+     *
+     */
+    public void checkOutCart(Product product, int quantity) {
     }
 }

@@ -39,4 +39,19 @@ public class Supplier extends User {
         super(username, name, adress);
         this.estoque = estoque;
     }
+
+    /**
+     *
+     */
+    public void registerProduct(Product product, int quantity) {
+
+    }
+
+    /**
+     *
+     */
+    public void deleteProduct(Product book, int quantity) {
+
+    }
+
 }

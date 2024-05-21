@@ -20,8 +20,28 @@ class Product {
     /**
      *
      */
+    String details;
+
+    /**
+     *
+     */
     public Product() {
         id = -1;
+        details = "Vazia!";
+    }
+
+    /**
+     *
+     */
+    public String getDetails() {
+        return details;
+    }
+
+    /**
+     *
+     */
+    public void setDetails(String details) {
+        this.details = details;
     }
 }
 
@@ -51,6 +71,16 @@ public class BookStore {
     /**
      *
      */
+    private ArrayList<Costumer> costumers;
+
+    /**
+     *
+     */
+    private ArrayList<Supplier> suppliers;
+
+    /**
+     *
+     */
     private JFrame frame;
 
     /**
@@ -66,7 +96,43 @@ public class BookStore {
     /**
      *
      */
+    public ArrayList<Costumer> getCostumers() {
+        return costumers;
+    }
+
+    /**
+     *
+     */
+    public void setCostumers(ArrayList<Costumer> costumers) {
+        this.costumers = costumers;
+    }
+
+    /**
+     *
+     */
+    public ArrayList<Supplier> getSuppliers() {
+        return suppliers;
+    }
+
+    /**
+     *
+     */
+    public void setSuppliers(ArrayList<Supplier> suppliers) {
+        this.suppliers = suppliers;
+    }
+
+    /**
+     *
+     */
     public void show() {
         frame.setVisible(true);
+    }
+
+    public ArrayList<Product> getAvailableProducts() {
+        return null;
+    }
+
+    public void viewAvailableProducts() {
+
     }
 }

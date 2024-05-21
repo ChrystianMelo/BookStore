@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 /**
  *
  */
-public class UserTests {
+public class UserTest {
 
     private User user;
     private Costumer costumer;
