@@ -48,15 +48,3 @@ GitHub Actions é uma plataforma de integração contínua e entrega contínua (
 O arquivo de configuração do GitHub Actions ([maven.yml](.github/workflows/maven.yml)) está configurado para:
 - Executar a build do projeto utilizando Maven.
 - Executar testes automatizados para garantir que nenhuma funcionalidade existente seja quebrada com novas alterações.
-
-## Contribuição
-Para contribuir com o projeto:
-
-- Faça um fork do repositório.
-- Crie uma branch para sua feature (git checkout -b feature/nova-feature).
-- Commit suas alterações (git commit -am 'Adiciona nova feature').
-- Envie para o repositório remoto (git push origin feature/nova-feature).
-- Crie um novo Pull Request.
-
-## Licença
-Este projeto está licenciado sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
