@@ -34,7 +34,7 @@ O projeto segue a estrutura padrão do Maven:
 │   │   ├── java
 │   │   └── resources
 │   └── test
-│       ├── java
+│       └── java
 ├── pom.xml
 └── README.md
 </pre>
