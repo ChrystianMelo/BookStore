@@ -25,6 +25,7 @@ public class SupplierTest {
 
         assertTrue(supplier.getEstoque().isEmpty());
     }
+    
 
     @Test
     public void testContainsBook() {
@@ -38,5 +39,16 @@ public class SupplierTest {
 
         assertTrue(supplier.getEstoque().isEmpty());
     }
+
+    @Test
+    public void testDeleteBookNotInStock() {
+        Book book = new Book(1, "Test Book", 19.99f, "Test Details");
+
+        assertThrows(InsufficientStockException.class, () -> {
+            supplier.deleteBook(book);
+        });
+    }
+
+    
 
 }
