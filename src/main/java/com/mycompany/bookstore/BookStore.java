@@ -1,84 +1,29 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * BookStore.java
  */
 package com.mycompany.bookstore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
- *
- */
-class Product {
-
-    /**
-     *
-     */
-    int id;
-
-    /**
-     *
-     */
-    String details;
-
-    /**
-     *
-     */
-    public Product() {
-        id = -1;
-        details = "Vazia!";
-    }
-
-    /**
-     *
-     */
-    public String getDetails() {
-        return details;
-    }
-
-    /**
-     *
-     */
-    public void setDetails(String details) {
-        this.details = details;
-    }
-}
-
-/**
- *
- */
-class Cart {
-
-    /**
-     *
-     */
-    ArrayList<Product> itens;
-
-    /**
-     *
-     */
-    public Cart() {
-        itens = new ArrayList<>();
-    }
-}
-
-/**
- *
+ * Classe que representa uma livraria.
  */
 public class BookStore {
 
     /**
-     *
+     * Lista de clientes da livraria.
      */
     private ArrayList<Costumer> costumers;
 
     /**
-     *
+     * Lista de fornecedores da livraria.
      */
     private ArrayList<Supplier> suppliers;
 
     /**
-     *
+     * Construtor padrão que inicializa as listas de clientes e fornecedores
+     * como vazias.
      */
     public BookStore() {
         costumers = new ArrayList<>();
@@ -86,7 +31,11 @@ public class BookStore {
     }
 
     /**
+     * Construtor que inicializa a livraria com listas de clientes e
+     * fornecedores especificadas.
      *
+     * @param costumers Lista de clientes.
+     * @param suppliers Lista de fornecedores.
      */
     public BookStore(ArrayList<Costumer> costumers, ArrayList<Supplier> suppliers) {
         this.costumers = costumers;
@@ -94,38 +43,54 @@ public class BookStore {
     }
 
     /**
+     * Obtém a lista de clientes da livraria.
      *
+     * @return Lista de clientes.
      */
     public ArrayList<Costumer> getCostumers() {
         return costumers;
     }
 
     /**
+     * Define a lista de clientes da livraria.
      *
+     * @param costumers Lista de clientes.
      */
     public void setCostumers(ArrayList<Costumer> costumers) {
         this.costumers = costumers;
     }
 
     /**
+     * Obtém a lista de fornecedores da livraria.
      *
+     * @return Lista de fornecedores.
      */
     public ArrayList<Supplier> getSuppliers() {
         return suppliers;
     }
 
     /**
+     * Define a lista de fornecedores da livraria.
      *
+     * @param suppliers Lista de fornecedores.
      */
     public void setSuppliers(ArrayList<Supplier> suppliers) {
         this.suppliers = suppliers;
     }
 
-    public ArrayList<Product> getAvailableProducts() {
-        return null;
-    }
+    /**
+     * Obtém a lista de livros disponíveis na livraria, combinando os estoques
+     * de todos os fornecedores.
+     *
+     * @return Relação de livros disponíveis e suas respectivas quantidades.
+     */
+    public HashMap<Book, Integer> getAvailableBooks() {
+        HashMap<Book, Integer> availableBooks = new HashMap<>();
 
-    public void viewAvailableProducts() {
+        suppliers.forEach((Supplier s) -> {
+            availableBooks.putAll(s.getEstoque());
+        });
 
+        return availableBooks;
     }
 }
