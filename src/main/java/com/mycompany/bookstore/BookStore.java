@@ -52,6 +52,13 @@ public class BookStore {
     }
 
     /**
+     * Adicione clientes a livraria.
+     */
+    public void addCostumer(Costumer c) {
+        costumers.add(c);
+    }
+
+    /**
      * Define a lista de clientes da livraria.
      *
      * @param costumers Lista de clientes.
@@ -67,6 +74,13 @@ public class BookStore {
      */
     public ArrayList<Supplier> getSuppliers() {
         return suppliers;
+    }
+
+    /**
+     * Adicione vendedor a livraria.
+     */
+    public void addSupplier(Supplier c) {
+        suppliers.add(c);
     }
 
     /**

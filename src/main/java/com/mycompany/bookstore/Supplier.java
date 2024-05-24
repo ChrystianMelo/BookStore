@@ -65,9 +65,8 @@ public class Supplier extends User {
      * Remove um livro do estoque com a quantidade especificada.
      *
      * @param book O livro a ser removido do estoque.
-     * @param quantity A quantidade do livro a ser removida.
      */
-    public void deleteBook(Book book, int quantity) {
+    public void deleteBook(Book book) {
         estoque.remove(book);
     }
 

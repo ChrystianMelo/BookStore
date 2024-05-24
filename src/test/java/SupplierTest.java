@@ -21,10 +21,22 @@ public class SupplierTest {
         Book book = new Book(1, "Test Book", 19.99f, "Test Details");
 
         supplier.registerBook(book, 10);
-        supplier.deleteBook(book, 10);
+        supplier.deleteBook(book);
 
         assertTrue(supplier.getEstoque().isEmpty());
     }
 
-   
+    @Test
+    public void testContainsBook() {
+        Book book = new Book(1, "Test Book", 19.99f, "Test Details");
+
+        supplier.registerBook(book, 10);
+
+        assertTrue(supplier.getEstoque().containsKey(book));
+
+        supplier.deleteBook(book);
+
+        assertTrue(supplier.getEstoque().isEmpty());
+    }
+
 }

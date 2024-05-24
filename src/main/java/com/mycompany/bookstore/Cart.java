@@ -23,6 +23,13 @@ public class Cart {
     }
 
     /**
+     * Retorn a lista de livros no carrinho e suas respectivas quantidades.
+     */
+    public HashMap<Book, Integer> getBooks() {
+        return books;
+    }
+
+    /**
      * Adiciona um livro ao carrinho com a quantidade especificada.
      *
      * @param book O livro a ser adicionado.
