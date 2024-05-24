@@ -1,5 +1,5 @@
 /*
- * Costumer.java
+ * Customer.java
  */
 package com.mycompany.bookstore;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Classe que representa um cliente na livraria, que também é um usuário.
  */
-public class Costumer extends User {
+public class Customer extends User {
 
     /**
      * Carrinho de compras do cliente.
@@ -28,7 +28,7 @@ public class Costumer extends User {
      * @param name Nome do cliente.
      * @param adress Endereço do cliente.
      */
-    public Costumer(String username, String name, Address adress) {
+    public Customer(String username, String name, Address adress) {
         super(username, name, adress);
         this.cart = new Cart();
         this.favorites = new ArrayList<>();
@@ -44,7 +44,7 @@ public class Costumer extends User {
      * @param cart Carrinho do cliente.
      * @param favorites Lista de livros favoritos do cliente.
      */
-    public Costumer(String username, String name, Address adress, Cart cart, ArrayList<Book> favorites) {
+    public Customer(String username, String name, Address adress, Cart cart, ArrayList<Book> favorites) {
         super(username, name, adress);
         this.cart = cart;
         this.favorites = favorites;

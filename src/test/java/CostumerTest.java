@@ -1,19 +1,19 @@
 
 import com.mycompany.bookstore.Address;
 import com.mycompany.bookstore.Book;
-import com.mycompany.bookstore.Costumer;
+import com.mycompany.bookstore.Customer;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CostumerTest {
 
-    private Costumer costumer;
+    private Customer costumer;
 
     @BeforeEach
     public void setUp() {
         Address address = new Address("Street", 123, "Neighborhood", "City", "State", "Country", "Complement");
-        costumer = new Costumer("username", "Costumer Name", address);
+        costumer = new Customer("username", "Costumer Name", address);
     }
 
     @Test

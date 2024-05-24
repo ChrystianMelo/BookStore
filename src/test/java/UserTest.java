@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
 import com.mycompany.bookstore.Address;
-import com.mycompany.bookstore.Costumer;
+import com.mycompany.bookstore.Customer;
 import com.mycompany.bookstore.Supplier;
 import com.mycompany.bookstore.User;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 public class UserTest {
 
     private User user;
-    private Costumer costumer;
+    private Customer costumer;
     private Supplier supplier;
     private Address address;
 
@@ -25,7 +25,7 @@ public class UserTest {
     public void setUp() {
         address = new Address("Street", 1, "Neightborhood", "City", "State", "Coountry", "12345");
         user = new User("user1", "User One", address);
-        costumer = new Costumer("costumer1", "Costumer One", address);
+        costumer = new Customer("costumer1", "Costumer One", address);
         supplier = new Supplier("supplier1", "Supplier One", address);
     }
 

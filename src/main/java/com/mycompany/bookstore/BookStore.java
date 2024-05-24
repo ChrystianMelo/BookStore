@@ -14,7 +14,7 @@ public class BookStore {
     /**
      * Lista de clientes da livraria.
      */
-    private ArrayList<Costumer> costumers;
+    private ArrayList<Customer> costumers;
 
     /**
      * Lista de fornecedores da livraria.
@@ -37,7 +37,7 @@ public class BookStore {
      * @param costumers Lista de clientes.
      * @param suppliers Lista de fornecedores.
      */
-    public BookStore(ArrayList<Costumer> costumers, ArrayList<Supplier> suppliers) {
+    public BookStore(ArrayList<Customer> costumers, ArrayList<Supplier> suppliers) {
         this.costumers = costumers;
         this.suppliers = suppliers;
     }
@@ -47,14 +47,14 @@ public class BookStore {
      *
      * @return Lista de clientes.
      */
-    public ArrayList<Costumer> getCostumers() {
+    public ArrayList<Customer> getCostumers() {
         return costumers;
     }
 
     /**
      * Adicione clientes a livraria.
      */
-    public void addCostumer(Costumer c) {
+    public void addCostumer(Customer c) {
         costumers.add(c);
     }
 
@@ -63,7 +63,7 @@ public class BookStore {
      *
      * @param costumers Lista de clientes.
      */
-    public void setCostumers(ArrayList<Costumer> costumers) {
+    public void setCostumers(ArrayList<Customer> costumers) {
         this.costumers = costumers;
     }
 

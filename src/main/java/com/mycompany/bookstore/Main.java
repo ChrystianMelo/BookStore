@@ -50,11 +50,11 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String username = scanner.next();
 
-        Costumer costumer = (Costumer) retrieveUser(bookStore, username);
+        Customer costumer = (Customer) retrieveUser(bookStore, username);
         if (costumer == null) {
             System.out.println("---------------------Cadastro----------------------------");
             Address address = new Address("Street", 123, "Neighborhood", "City", "State", "Country", "Complement");
-            costumer = new Costumer(username, "Costumer Name", address);
+            costumer = new Customer(username, "Costumer Name", address);
             bookStore.addCostumer(costumer);
         }
 
