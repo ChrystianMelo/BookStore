@@ -5,7 +5,6 @@
 package com.mycompany.bookstore;
 
 import java.util.ArrayList;
-import javax.swing.*;
 
 /**
  *
@@ -81,16 +80,17 @@ public class BookStore {
     /**
      *
      */
-    private JFrame frame;
+    public BookStore() {
+        costumers = new ArrayList<>();
+        suppliers = new ArrayList<>();
+    }
 
     /**
      *
      */
-    public BookStore() {
-        frame = new JFrame("Sistema de Venda de Livros");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 400);
-        frame.setLocationRelativeTo(null);
+    public BookStore(ArrayList<Costumer> costumers, ArrayList<Supplier> suppliers) {
+        this.costumers = costumers;
+        this.suppliers = suppliers;
     }
 
     /**
@@ -119,13 +119,6 @@ public class BookStore {
      */
     public void setSuppliers(ArrayList<Supplier> suppliers) {
         this.suppliers = suppliers;
-    }
-
-    /**
-     *
-     */
-    public void show() {
-        frame.setVisible(true);
     }
 
     public ArrayList<Product> getAvailableProducts() {
