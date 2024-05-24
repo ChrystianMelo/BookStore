@@ -25,4 +25,14 @@ public class SupplierTest {
 
         assertTrue(supplier.getEstoque().isEmpty());
     }
+
+    @Test
+    public void testDeleteBookWithInsufficientStock() {
+        Book book = new Book(1, "Test Book", 19.99f, "Test Details");
+        supplier.registerBook(book, 10);
+        assertThrows(IllegalArgumentException.class, () -> supplier.deleteBook(book, 20));
+        HashMap<Book, Integer> expectedStock = new HashMap<>();
+        expectedStock.put(book, 10);
+        assertEquals(expectedStock, supplier.getEstoque());
+    }
 }
