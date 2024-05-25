@@ -1,7 +1,9 @@
 
 import com.mycompany.bookstore.Address;
 import com.mycompany.bookstore.Book;
+import com.mycompany.bookstore.InsufficientStockException;
 import com.mycompany.bookstore.Supplier;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,7 +47,7 @@ public class SupplierTest {
         Book book = new Book(1, "Test Book", 19.99f, "Test Details");
 
         assertThrows(InsufficientStockException.class, () -> {
-            supplier.deleteBook(book);
+            supplier.deleteBook(book,1);
         });
     }
 

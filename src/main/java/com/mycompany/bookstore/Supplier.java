@@ -66,7 +66,8 @@ public class Supplier extends User {
      *
      * @param book O livro a ser removido do estoque.
      * @param quantity A quantidade do livro a ser removida.
-     * @throws InsufficientStockException se o estoque for insuficiente para a quantidade especificada.
+     * @throws InsufficientStockException se o estoque for insuficiente para a
+     * quantidade especificada.
      */
     public void deleteBook(Book book, int quantity) throws InsufficientStockException {
         Integer currentStock = estoque.get(book);
@@ -74,6 +75,17 @@ public class Supplier extends User {
             throw new InsufficientStockException("Estoque insuficiente para o livro: " + book.getName());
         }
         estoque.put(book, currentStock - quantity);
+    }
+
+    /**
+     *
+     * Remove um livro do estoque com a quantidade especificada.
+     *
+     *
+     * @param book O livro a ser removido do estoque.
+     */
+    public void deleteBook(Book book) {
+        estoque.remove(book);
     }
 
 }
