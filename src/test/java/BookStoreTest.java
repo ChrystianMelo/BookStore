@@ -6,7 +6,9 @@ import com.mycompany.bookstore.Supplier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,8 +29,40 @@ public class BookStoreTest {
     @Test
     public void testAddCustomer() {
         Customer customer = new Customer("test_customer", "Test Customer", null);
-        bookStore.addCostumer(customer);
+        try {
+            bookStore.addCostumer(customer);
+        } catch (Exception ex) {
+            fail();
+        }
         assertTrue(bookStore.getCostumers().contains(customer));
+    }
+
+    @Test
+    public void testAddCustomerWithSameUsername() {
+        Customer customer = new Customer("test_customer", "Test Customer", null);
+        try {
+            bookStore.addCostumer(customer);
+        } catch (Exception ex) {
+            fail();
+        }
+        Customer customer2 = new Customer("test_customer", "Test Customer", null);
+
+        assertThrows(Exception.class, () -> {
+            bookStore.addCostumer(customer2);
+        });
+    }
+
+    @Test
+    public void testAddSameCustomer() {
+        Customer customer = new Customer("test_customer", "Test Customer", null);
+        try {
+            bookStore.addCostumer(customer);
+        } catch (Exception ex) {
+            fail();
+        }
+        assertThrows(Exception.class, () -> {
+            bookStore.addCostumer(customer);
+        });
     }
 
     @Test

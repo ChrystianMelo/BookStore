@@ -54,8 +54,17 @@ public class BookStore {
     /**
      * Adicione clientes a livraria.
      */
-    public void addCostumer(Customer c) {
-        costumers.add(c);
+    public void addCostumer(Customer costumer) throws Exception {
+        if (costumers.contains(costumer)) {
+            throw new Exception("Already exists.");
+        }
+
+        for (Customer c : costumers) {
+            if (c.getUsername().equals(costumer.getUsername())) {
+                throw new Exception("Invalid username.");
+            }
+        }
+        costumers.add(costumer);
     }
 
     /**

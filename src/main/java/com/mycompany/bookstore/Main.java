@@ -55,7 +55,11 @@ public class Main {
             System.out.println("---------------------Cadastro----------------------------");
             Address address = new Address("Street", 123, "Neighborhood", "City", "State", "Country", "Complement");
             costumer = new Customer(username, "Costumer Name", address);
-            bookStore.addCostumer(costumer);
+            try {
+                bookStore.addCostumer(costumer);
+            } catch (Exception ex) {
+                System.out.println("ERROR");
+            }
         }
 
         HashMap<Book, Integer> availableBooks = bookStore.getAvailableBooks();
