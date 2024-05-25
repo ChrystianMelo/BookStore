@@ -68,8 +68,40 @@ public class BookStoreTest {
     @Test
     public void testAddSupplier() {
         Supplier supplier = new Supplier("test_supplier", "Test Supplier", null);
-        bookStore.addSupplier(supplier);
+        try {
+            bookStore.addSupplier(supplier);
+        } catch (Exception ex) {
+            fail();
+        }
         assertTrue(bookStore.getSuppliers().contains(supplier));
+    }
+
+    @Test
+    public void testAddSupplierWithSameUsername() {
+        Supplier customer = new Supplier("test_customer", "Test Customer", null);
+        try {
+            bookStore.addSupplier(customer);
+        } catch (Exception ex) {
+            fail();
+        }
+        Supplier customer2 = new Supplier("test_customer", "Test Customer", null);
+
+        assertThrows(Exception.class, () -> {
+            bookStore.addSupplier(customer2);
+        });
+    }
+
+    @Test
+    public void testAddSameSupplier() {
+        Supplier customer = new Supplier("test_customer", "Test Customer", null);
+        try {
+            bookStore.addSupplier(customer);
+        } catch (Exception ex) {
+            fail();
+        }
+        assertThrows(Exception.class, () -> {
+            bookStore.addSupplier(customer);
+        });
     }
 
     @Test
@@ -99,8 +131,12 @@ public class BookStoreTest {
         supplier1.registerBook(new Book(2, "Book 2", 15.0f, "Details"), 3);
         supplier2.registerBook(new Book(3, "Book 3", 20.0f, "Details"), 7);
 
-        bookStore.addSupplier(supplier1);
-        bookStore.addSupplier(supplier2);
+        try {
+            bookStore.addSupplier(supplier1);
+            bookStore.addSupplier(supplier2);
+        } catch (Exception ex) {
+            fail();
+        }
 
         HashMap<Book, Integer> expectedAvailableBooks = new HashMap<>();
         expectedAvailableBooks.put(new Book(1, "Book 1", 10.0f, "Details"), 5);
@@ -108,5 +144,61 @@ public class BookStoreTest {
         expectedAvailableBooks.put(new Book(3, "Book 3", 20.0f, "Details"), 7);
 
         assertTrue(bookStore.getAvailableBooks().keySet().containsAll(expectedAvailableBooks.keySet()));
+    }
+
+    @Test
+    public void testRemoveCustomer() {
+        Customer customer = new Customer("test_customer", "Test Customer", null);
+
+        try {
+            bookStore.addCostumer(customer);
+            bookStore.removeCustomer(customer);
+        } catch (Exception ex) {
+            fail();
+        }
+        assertTrue(!bookStore.getCostumers().contains(customer));
+    }
+
+    @Test
+    public void testRemoveSupplier() {
+        Supplier supplier = new Supplier("test_supplier", "Test Supplier", null);
+        try {
+            bookStore.addSupplier(supplier);
+            bookStore.removeSupplier(supplier);
+        } catch (Exception ex) {
+            fail();
+        }
+        assertTrue(!bookStore.getSuppliers().contains(supplier));
+    }
+
+    @Test
+    public void testUpdateBookStock() {
+        Supplier supplier = new Supplier("test_supplier", "Test Supplier", null);
+        Book book = new Book(1, "Book 1", 10.0f, "Details");
+        supplier.registerBook(book, 5);
+        try {
+            bookStore.addSupplier(supplier);
+        } catch (Exception ex) {
+            fail();
+        }
+
+        supplier.registerBook(book, 10);  // Update stock
+        assertEquals(10, bookStore.getAvailableBooks().get(book).intValue());
+    }
+
+    @Test
+    public void testExceptionForNonExistentCustomerRemoval() {
+        Customer customer = new Customer("nonexistent_customer", "Nonexistent Customer", null);
+        assertThrows(Exception.class, () -> {
+            bookStore.removeCustomer(customer);
+        });
+    }
+
+    @Test
+    public void testExceptionForNonExistentSupplierRemoval() {
+        Supplier supplier = new Supplier("nonexistent_supplier", "Nonexistent Supplier", null);
+        assertThrows(Exception.class, () -> {
+            bookStore.removeSupplier(supplier);
+        });
     }
 }

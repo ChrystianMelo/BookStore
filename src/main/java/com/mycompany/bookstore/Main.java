@@ -102,7 +102,11 @@ public class Main {
             System.out.println("---------------------Cadastro----------------------------");
             Address address = new Address("Street", 123, "Neighborhood", "City", "State", "Country", "Complement");
             supplier = new Supplier(username, "Supplier Name", address);
-            bookStore.addSupplier(supplier);
+            try {
+                bookStore.addSupplier(supplier);
+            } catch (Exception ex) {
+                System.out.println("ERROR");
+            }
         }
 
         System.out.println("-------------------------------------------------");

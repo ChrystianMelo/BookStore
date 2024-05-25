@@ -68,6 +68,16 @@ public class BookStore {
     }
 
     /**
+     * Remover cliente da livraria.
+     */
+    public void removeCustomer(Customer costumer) throws Exception {
+        if (!costumers.contains(costumer)) {
+            throw new Exception("There is no supplier.");
+        }
+        costumers.remove(costumer);
+    }
+
+    /**
      * Define a lista de clientes da livraria.
      *
      * @param costumers Lista de clientes.
@@ -88,8 +98,27 @@ public class BookStore {
     /**
      * Adicione vendedor a livraria.
      */
-    public void addSupplier(Supplier c) {
-        suppliers.add(c);
+    public void addSupplier(Supplier supplier) throws Exception {
+        if (suppliers.contains(supplier)) {
+            throw new Exception("Already exists.");
+        }
+
+        for (Supplier c : suppliers) {
+            if (c.getUsername().equals(supplier.getUsername())) {
+                throw new Exception("Invalid username.");
+            }
+        }
+        suppliers.add(supplier);
+    }
+
+    /**
+     * Remover vendedor a livraria.
+     */
+    public void removeSupplier(Supplier c) throws Exception {
+        if (!suppliers.contains(c)) {
+            throw new Exception("There is no supplier.");
+        }
+        suppliers.remove(c);
     }
 
     /**
