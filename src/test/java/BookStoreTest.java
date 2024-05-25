@@ -127,11 +127,11 @@ public class BookStoreTest {
         Supplier supplier1 = new Supplier("supplier1", "Supplier 1", null);
         Supplier supplier2 = new Supplier("supplier2", "Supplier 2", null);
 
-        supplier1.registerBook(new Book(1, "Book 1", 10.0f, "Details"), 5);
-        supplier1.registerBook(new Book(2, "Book 2", 15.0f, "Details"), 3);
-        supplier2.registerBook(new Book(3, "Book 3", 20.0f, "Details"), 7);
-
         try {
+            supplier1.registerBook(new Book(1, "Book 1", 10.0f, "Details"), 5);
+            supplier1.registerBook(new Book(2, "Book 2", 15.0f, "Details"), 3);
+            supplier2.registerBook(new Book(3, "Book 3", 20.0f, "Details"), 7);
+
             bookStore.addSupplier(supplier1);
             bookStore.addSupplier(supplier2);
         } catch (Exception ex) {
@@ -175,14 +175,14 @@ public class BookStoreTest {
     public void testUpdateBookStock() {
         Supplier supplier = new Supplier("test_supplier", "Test Supplier", null);
         Book book = new Book(1, "Book 1", 10.0f, "Details");
-        supplier.registerBook(book, 5);
         try {
+            supplier.registerBook(book, 5);
             bookStore.addSupplier(supplier);
+            supplier.registerBook(book, 5);  // Update stock
         } catch (Exception ex) {
             fail();
         }
 
-        supplier.registerBook(book, 10);  // Update stock
         assertEquals(10, bookStore.getAvailableBooks().get(book).intValue());
     }
 

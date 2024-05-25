@@ -37,4 +37,11 @@ public class CostumerTest {
 
         assertTrue(costumer.getCart().isEmpty());
     }
+
+    @Test
+    public void testCheckOutEmptyCart() {
+        assertThrows(Exception.class, () -> {
+            costumer.checkOutCart();
+        });
+    }
 }

@@ -93,6 +93,10 @@ public class Customer extends User {
      * Finaliza a compra dos livros no carrinho do cliente.
      */
     public void checkOutCart() throws Exception {
+        if (cart.isEmpty()) {
+            throw new Exception("Empty Cart");
+        }
+
         cart.checkOut();
     }
 }

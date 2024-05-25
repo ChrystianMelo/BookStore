@@ -127,7 +127,12 @@ public class Main {
                 System.out.println("Qual a quantidade disponivel?");
                 int quantity = scanner.nextInt();
 
-                supplier.registerBook(book, quantity);
+                try {
+                    supplier.registerBook(book, quantity);
+                } catch (Exception ex) {
+                    System.out.println("ERORR");
+                }
+
                 break;
 
             case 2:

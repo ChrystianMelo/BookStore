@@ -57,8 +57,16 @@ public class Supplier extends User {
      * @param book O livro a ser adicionado ao estoque.
      * @param quantity A quantidade do livro a ser adicionada.
      */
-    public void registerBook(Book book, int quantity) {
-        estoque.put(book, quantity);
+    public void registerBook(Book book, int quantity) throws Exception {
+        if (quantity <= 0) {
+            throw new Exception("Null or negativ quantity.");
+        }
+
+        int finalQuantity = quantity;
+        if (estoque.containsKey(book)) {
+            finalQuantity += estoque.get(book);
+        }
+        estoque.put(book, finalQuantity);
     }
 
     /**
