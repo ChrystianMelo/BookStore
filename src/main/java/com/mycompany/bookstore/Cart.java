@@ -56,14 +56,27 @@ public class Cart {
         if (!books.containsKey(book)) {
             throw new Exception("This book is not in the cart");
         }
-        books.remove(book);
+
+        int quantityInStock = books.get(book);
+        if (quantityInStock < quantity) {
+            throw new Exception("The existant quantity is lower than that.");
+        } else if (quantityInStock == quantity) {
+            books.remove(book);
+        } else {
+            books.remove(book);
+            books.put(book, quantityInStock - quantity);
+        }
     }
 
     /**
      * Permite finalizar a compra dos livros presentes no carrinho.
      */
-    public void checkOut() {
+    public void checkOut() throws Exception {
         // (pendente) Efetivar a compra.
+        if (isEmpty()) {
+            throw new Exception("Carrinho vazio.");
+        }
+
         emptyCart();
     }
 

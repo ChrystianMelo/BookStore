@@ -29,7 +29,11 @@ public class CostumerTest {
     public void testCheckOutCart() {
         Book book = new Book(1, "Test Book", 19.99f, "Test Details");
         costumer.addBook(book, 2);
-        costumer.checkOutCart();
+        try {
+            costumer.checkOutCart();
+        } catch (Exception ex) {
+            fail();
+        }
 
         assertTrue(costumer.getCart().isEmpty());
     }

@@ -92,7 +92,7 @@ public class Customer extends User {
     /**
      * Finaliza a compra dos livros no carrinho do cliente.
      */
-    public void checkOutCart() {
+    public void checkOutCart() throws Exception {
         cart.checkOut();
     }
 }

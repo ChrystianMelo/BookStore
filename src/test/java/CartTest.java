@@ -1,3 +1,4 @@
+
 import com.mycompany.bookstore.Book;
 import com.mycompany.bookstore.Cart;
 import static org.junit.jupiter.api.Assertions.*;
@@ -37,8 +38,33 @@ public class CartTest {
     public void testCheckOutEmptiesCart() {
         Book book = new Book(1, "Test Book", 19.99f, "Test Details");
         cart.addItem(book, 2);
-        cart.checkOut();
+
+        try {
+            cart.checkOut();
+        } catch (Exception e) {
+            fail("Method threw an exception: " + e.getMessage());
+        }
+
         assertTrue(cart.isEmpty());
+    }
+
+    @Test
+    public void testRemovePartialQuantityOfItem() throws Exception {
+        Book book = new Book(1, "Test Book", 19.99f, "Test Details");
+        cart.addItem(book, 5);
+        cart.removeBook(book, 3);
+
+        assertEquals(2, cart.getBooks().get(book));
+    }
+
+    @Test
+    public void testRemoveMoreThanExisantQuantityOfItem() throws Exception {
+        Book book = new Book(1, "Test Book", 19.99f, "Test Details");
+        cart.addItem(book, 5);
+
+        assertThrows(Exception.class, () -> {
+            cart.removeBook(book, 8);
+        });
     }
 
     @Test
