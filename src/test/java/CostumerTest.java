@@ -28,8 +28,8 @@ public class CostumerTest {
     @Test
     public void testCheckOutCart() {
         Book book = new Book(1, "Test Book", 19.99f, "Test Details");
-        costumer.addBook(book, 2);
         try {
+            costumer.addBook(book, 2);
             costumer.checkOutCart();
         } catch (Exception ex) {
             fail();

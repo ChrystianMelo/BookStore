@@ -74,7 +74,7 @@ public class Customer extends User {
      * @param book O livro a ser adicionado ao carrinho.
      * @param quantity A quantidade do livro a ser adicionada.
      */
-    public void addBook(Book book, int quantity) {
+    public void addBook(Book book, int quantity) throws Exception {
         cart.addItem(book, quantity);
     }
 

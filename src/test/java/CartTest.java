@@ -16,17 +16,27 @@ public class CartTest {
 
     @Test
     public void testAddItem() {
-        Book book = new Book(1, "Test Book", 19.99f, "Test Details");
-        cart.addItem(book, 1);
-        assertEquals(1, cart.getBooks().get(book));
+        try {
+            Book book = new Book(1, "Test Book", 19.99f, "Test Details");
+            cart.addItem(book, 1);
+            assertEquals(1, cart.getBooks().get(book));
+
+        } catch (Exception ex) {
+            fail();
+        }
     }
 
     @Test
     public void testAddMultipleQuantitiesOfSameItem() {
-        Book book = new Book(1, "Test Book", 19.99f, "Test Details");
-        cart.addItem(book, 1);
-        cart.addItem(book, 2);
-        assertEquals(3, cart.getBooks().get(book));
+        try {
+            Book book = new Book(1, "Test Book", 19.99f, "Test Details");
+            cart.addItem(book, 1);
+            cart.addItem(book, 2);
+            assertEquals(3, cart.getBooks().get(book));
+
+        } catch (Exception ex) {
+            fail();
+        }
     }
 
     @Test
@@ -37,7 +47,12 @@ public class CartTest {
     @Test
     public void testCheckOutEmptiesCart() {
         Book book = new Book(1, "Test Book", 19.99f, "Test Details");
-        cart.addItem(book, 2);
+        try {
+            cart.addItem(book, 2);
+
+        } catch (Exception ex) {
+            fail();
+        }
 
         try {
             cart.checkOut();
@@ -78,7 +93,11 @@ public class CartTest {
     @Test
     public void testRemoveItemNotInCart() {
         Book book = new Book(1, "Test Book", 19.99f, "Test Details");
-        cart.addItem(book, 2);
+        try {
+            cart.addItem(book, 2);
+        } catch (Exception ex) {
+            fail();
+        }
 
         Book book2 = new Book(2, "Test Book2", 19.99f, "Test Details2");
 
@@ -91,14 +110,58 @@ public class CartTest {
 
     @Test
     public void testEmptyCart() {
-        Book book = new Book(1, "Test Book", 19.99f, "Test Details");
-        cart.addItem(book, 2);
+        try {
+            Book book = new Book(1, "Test Book", 19.99f, "Test Details");
+            cart.addItem(book, 2);
 
-        Book book2 = new Book(2, "Test Book2", 19.99f, "Test Details2");
+            Book book2 = new Book(2, "Test Book2", 19.99f, "Test Details2");
+            cart.addItem(book2, 3);
+
+            cart.emptyCart();
+
+            assertTrue(cart.isEmpty());
+        } catch (Exception ex) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testGetTotalValue() {
+        Book book1 = new Book(1, "Test Book", 19f, "Test Details");
+        Book book2 = new Book(2, "Another Book", 9f, "Other Details");
+
+        try {
+            cart.addItem(book1, 2); // Total = 2 * 19
+            cart.addItem(book2, 3); // Total = 3 * 9
+        } catch (Exception ex) {
+            fail();
+        }
+
+        float expectedTotal = (2 * 19f) + (3 * 9f);
+        assertEquals(expectedTotal, cart.getTotal(), 0.01);
+    }
+
+    @Test
+    public void testAddNegativeQuantity() {
+        Book book = new Book(1, "Test Book", 19.99f, "Test Details");
+
+        assertThrows(Exception.class, () -> {
+            cart.addItem(book, -1);
+        });
+    }
+
+    @Test
+    public void testRemoveAllItemsAtOnce() throws Exception {
+        Book book1 = new Book(1, "Test Book", 19.99f, "Test Details");
+        Book book2 = new Book(2, "Another Book", 9.99f, "Other Details");
+
+        cart.addItem(book1, 2);
         cart.addItem(book2, 3);
 
-        cart.emptyCart();
+        cart.removeBook(book1, 2);
+        cart.removeBook(book2, 3);
 
         assertTrue(cart.isEmpty());
     }
+
 }

@@ -4,6 +4,7 @@
 package com.mycompany.bookstore;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Classe que representa um carrinho de compras.
@@ -35,7 +36,11 @@ public class Cart {
      * @param book O livro a ser adicionado.
      * @param quantity A quantidade do livro a ser adicionada.
      */
-    public void addItem(Book book, int quantity) {
+    public void addItem(Book book, int quantity) throws Exception {
+        if (quantity <= 0) {
+            throw new Exception("Negative or null quantity.");
+        }
+
         int finalQuantity = quantity;
 
         if (books.containsKey(book)) {
@@ -78,6 +83,16 @@ public class Cart {
         }
 
         emptyCart();
+    }
+
+    public int getTotal() {
+        int total = 0;
+
+        for (Map.Entry<Book, Integer> entry : books.entrySet()) {
+            total += entry.getKey().getValue() * entry.getValue();
+        }
+
+        return total;
     }
 
     /**

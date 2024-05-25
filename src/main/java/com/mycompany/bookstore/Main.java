@@ -77,9 +77,15 @@ public class Main {
                 int quantity = scanner.nextInt();
 
                 Book requested = (Book) availableBooks.keySet().toArray()[bookID - 1];
-                costumer.addBook(requested, quantity);
+
+                try {
+                    costumer.addBook(requested, quantity);
+                } catch (Exception ex) {
+                    System.out.println("ERROR");
+                }
 
                 break;
+
             case 2:
                 print(costumer.getCart().getBooks());
                 break;
