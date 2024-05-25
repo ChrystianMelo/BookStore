@@ -51,4 +51,32 @@ public class UserTest {
         assertEquals(address, supplier.getAdress());
         assertNotNull(supplier.getEstoque());
     }
+
+    @Test
+    public void testSetName() {
+        user.setName("New User Name");
+        assertEquals("New User Name", user.getName());
+    }
+
+    @Test
+    public void testSetAdress() {
+        Address newAddress = new Address("New Street", 2, "New Neightborhood", "New City", "New State", "New Country", "67890");
+        user.setAdress(newAddress);
+        assertEquals(newAddress, user.getAdress());
+    }
+
+    @Test
+    public void testGetUsername() {
+        assertEquals("user1", user.getUsername());
+    }
+
+    @Test
+    public void testGetName() {
+        assertEquals("User One", user.getName());
+    }
+
+    @Test
+    public void testGetAdress() {
+        assertEquals(address, user.getAdress());
+    }
 }
