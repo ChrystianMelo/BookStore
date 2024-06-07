@@ -3,6 +3,7 @@
  */
 package com.mycompany.bookstore;
 
+import com.mycompany.bookstore.gui.BookStoreGUI;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -18,6 +19,8 @@ public class Main {
      */
     public static void main(String[] args) {
         BookStore bookStore = new BookStore();
+        BookStoreGUI gui = new BookStoreGUI();
+        gui.setVisible(true);
 
         boolean finish = false;
         while (!finish) {

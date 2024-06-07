@@ -1,0 +1,1088 @@
+From 41e28d4d61c98edae6b1c6b43deec13e76986280 Mon Sep 17 00:00:00 2001
+From: Chrystian Melo <chrysmelao@gmail.com>
+Date: Fri, 7 Jun 2024 16:43:02 -0300
+Subject: [PATCH] #4 Adding the structure of the project GUI.
+
+---
+ pom.xml                                       |   5 +
+ .../java/com/mycompany/bookstore/Main.java    |   3 +
+ .../mycompany/bookstore/gui/BookStoreGUI.form | 412 ++++++++++++++++++
+ .../mycompany/bookstore/gui/BookStoreGUI.java | 281 ++++++++++++
+ src/main/resources/cart50x50.png              | Bin 0 -> 773 bytes
+ src/main/resources/github50x50.png            | Bin 0 -> 1047 bytes
+ src/main/resources/search20x20.png            | Bin 0 -> 745 bytes
+ src/main/resources/user50x50.png              | Bin 0 -> 1515 bytes
+ src/main/resources/user_icon.png              | Bin 11096 -> 0 bytes
+ 9 files changed, 701 insertions(+)
+ create mode 100644 src/main/java/com/mycompany/bookstore/gui/BookStoreGUI.form
+ create mode 100644 src/main/java/com/mycompany/bookstore/gui/BookStoreGUI.java
+ create mode 100644 src/main/resources/cart50x50.png
+ create mode 100644 src/main/resources/github50x50.png
+ create mode 100644 src/main/resources/search20x20.png
+ create mode 100644 src/main/resources/user50x50.png
+ delete mode 100644 src/main/resources/user_icon.png
+
+diff --git a/pom.xml b/pom.xml
+index bda6ae3..eb8fcd9 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -27,6 +27,11 @@
+             <version>5.6.0</version>
+             <scope>test</scope>
+         </dependency>
++        <dependency>
++            <groupId>org.netbeans.external</groupId>
++            <artifactId>AbsoluteLayout</artifactId>
++            <version>RELEASE210</version>
++        </dependency>
+     </dependencies>
+     
+     <properties>
+diff --git a/src/main/java/com/mycompany/bookstore/Main.java b/src/main/java/com/mycompany/bookstore/Main.java
+index 63ad477..a697ee7 100644
+--- a/src/main/java/com/mycompany/bookstore/Main.java
++++ b/src/main/java/com/mycompany/bookstore/Main.java
+@@ -3,6 +3,7 @@
+  */
+ package com.mycompany.bookstore;
+ 
++import com.mycompany.bookstore.gui.BookStoreGUI;
+ import java.util.HashMap;
+ import java.util.Iterator;
+ import java.util.Map;
+@@ -18,6 +19,8 @@ public class Main {
+      */
+     public static void main(String[] args) {
+         BookStore bookStore = new BookStore();
++        BookStoreGUI gui = new BookStoreGUI();
++        gui.setVisible(true);
+ 
+         boolean finish = false;
+         while (!finish) {
+diff --git a/src/main/java/com/mycompany/bookstore/gui/BookStoreGUI.form b/src/main/java/com/mycompany/bookstore/gui/BookStoreGUI.form
+new file mode 100644
+index 0000000..39d8c3a
+--- /dev/null
++++ b/src/main/java/com/mycompany/bookstore/gui/BookStoreGUI.form
+@@ -0,0 +1,412 @@
++<?xml version="1.0" encoding="UTF-8" ?>
++
++<Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
++  <Properties>
++    <Property name="defaultCloseOperation" type="int" value="3"/>
++    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++      <Dimension value="[550, 550]"/>
++    </Property>
++    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++      <Dimension value="[550, 550]"/>
++    </Property>
++    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++      <Dimension value="[550, 550]"/>
++    </Property>
++    <Property name="resizable" type="boolean" value="false"/>
++    <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++      <Dimension value="[550, 550]"/>
++    </Property>
++  </Properties>
++  <SyntheticProperties>
++    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
++    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
++  </SyntheticProperties>
++  <AuxValues>
++    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
++    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
++    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
++    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
++    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
++    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
++    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
++    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
++    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
++    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,38,0,0,2,38"/>
++  </AuxValues>
++
++  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
++  <SubComponents>
++    <Container class="javax.swing.JPanel" name="headerPane">
++      <Properties>
++        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++          <Dimension value="[500, 50]"/>
++        </Property>
++        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++          <Dimension value="[500, 50]"/>
++        </Property>
++        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++          <Dimension value="[500, 50]"/>
++        </Property>
++      </Properties>
++      <AccessibilityProperties>
++        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="headerPane"/>
++      </AccessibilityProperties>
++      <Constraints>
++        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
++          <GridBagConstraints gridX="-1" gridY="-1" gridWidth="1" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
++        </Constraint>
++      </Constraints>
++
++      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
++      <SubComponents>
++        <Component class="javax.swing.JLabel" name="titleLabel">
++          <Properties>
++            <Property name="text" type="java.lang.String" value="Book Store (v1.0)"/>
++            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++              <Dimension value="[250, 50]"/>
++            </Property>
++            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++              <Dimension value="[250, 50]"/>
++            </Property>
++            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++              <Dimension value="[250, 50]"/>
++            </Property>
++          </Properties>
++          <Constraints>
++            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
++              <GridBagConstraints gridX="-1" gridY="-1" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
++            </Constraint>
++          </Constraints>
++        </Component>
++        <Container class="javax.swing.JPanel" name="jPanel2">
++          <Properties>
++            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++              <Dimension value="[250, 50]"/>
++            </Property>
++            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++              <Dimension value="[250, 50]"/>
++            </Property>
++            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++              <Dimension value="[250, 50]"/>
++            </Property>
++          </Properties>
++          <Constraints>
++            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
++              <GridBagConstraints gridX="-1" gridY="-1" gridWidth="1" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
++            </Constraint>
++          </Constraints>
++          <SubComponents>
++            <Component class="javax.swing.JLabel" name="cartIBtnLabel">
++              <Properties>
++                <Property name="horizontalAlignment" type="int" value="0"/>
++                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
++                  <Image iconType="3" name="/cart50x50.png"/>
++                </Property>
++                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
++                  <Color id="Hand Cursor"/>
++                </Property>
++                <Property name="horizontalTextPosition" type="int" value="0"/>
++                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++                  <Dimension value="[50, 50]"/>
++                </Property>
++                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++                  <Dimension value="[50, 50]"/>
++                </Property>
++                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++                  <Dimension value="[50, 50]"/>
++                </Property>
++              </Properties>
++            </Component>
++            <Component class="javax.swing.JLabel" name="userBtnLabel">
++              <Properties>
++                <Property name="horizontalAlignment" type="int" value="0"/>
++                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
++                  <Image iconType="3" name="/user50x50.png"/>
++                </Property>
++                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
++                  <Color id="Hand Cursor"/>
++                </Property>
++                <Property name="horizontalTextPosition" type="int" value="0"/>
++                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++                  <Dimension value="[50, 50]"/>
++                </Property>
++                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++                  <Dimension value="[50, 50]"/>
++                </Property>
++                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++                  <Dimension value="[50, 50]"/>
++                </Property>
++              </Properties>
++            </Component>
++          </SubComponents>
++          <LayoutCode>
++            <CodeStatement>
++              <CodeExpression id="1_flowLayout1">
++                <CodeVariable name="flowLayout1" type="4096" declaredType="java.awt.FlowLayout"/>
++                <ExpressionOrigin>
++                  <ExpressionProvider type="CodeConstructor">
++                    <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int, int, int"/>
++                  </ExpressionProvider>
++                  <Parameters>
++                    <CodeExpression id="2">
++                      <ExpressionOrigin>
++                        <Value type="int" value="4"/>
++                      </ExpressionOrigin>
++                    </CodeExpression>
++                    <CodeExpression id="3">
++                      <ExpressionOrigin>
++                        <Value type="int" value="20"/>
++                      </ExpressionOrigin>
++                    </CodeExpression>
++                    <CodeExpression id="4">
++                      <ExpressionOrigin>
++                        <Value type="int" value="0"/>
++                      </ExpressionOrigin>
++                    </CodeExpression>
++                  </Parameters>
++                </ExpressionOrigin>
++              </CodeExpression>
++              <StatementProvider type="CodeExpression">
++                <CodeExpression id="1_flowLayout1"/>
++              </StatementProvider>
++              <Parameters>
++                <CodeExpression id="2"/>
++                <CodeExpression id="3"/>
++                <CodeExpression id="4"/>
++              </Parameters>
++            </CodeStatement>
++            <CodeStatement>
++              <CodeExpression id="1_flowLayout1"/>
++              <StatementProvider type="CodeMethod">
++                <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
++              </StatementProvider>
++              <Parameters>
++                <CodeExpression id="5">
++                  <ExpressionOrigin>
++                    <Value type="boolean" value="true"/>
++                  </ExpressionOrigin>
++                </CodeExpression>
++              </Parameters>
++            </CodeStatement>
++            <CodeStatement>
++              <CodeExpression id="6_jPanel2">
++                <CodeVariable name="jPanel2" type="8194" declaredType="javax.swing.JPanel"/>
++                <ExpressionOrigin>
++                  <ExpressionProvider type="ComponentRef">
++                    <ComponentRef name="jPanel2"/>
++                  </ExpressionProvider>
++                </ExpressionOrigin>
++              </CodeExpression>
++              <StatementProvider type="CodeMethod">
++                <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
++              </StatementProvider>
++              <Parameters>
++                <CodeExpression id="1_flowLayout1"/>
++              </Parameters>
++            </CodeStatement>
++          </LayoutCode>
++        </Container>
++      </SubComponents>
++    </Container>
++    <Container class="javax.swing.JPanel" name="bodyPane">
++      <Properties>
++        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++          <Dimension value="[500, 400]"/>
++        </Property>
++        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++          <Dimension value="[500, 400]"/>
++        </Property>
++        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++          <Dimension value="[500, 400]"/>
++        </Property>
++      </Properties>
++      <AccessibilityProperties>
++        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="bodyPane"/>
++      </AccessibilityProperties>
++      <Constraints>
++        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
++          <GridBagConstraints gridX="0" gridY="1" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
++        </Constraint>
++      </Constraints>
++
++      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
++      <SubComponents>
++        <Container class="javax.swing.JPanel" name="searchPane">
++          <Properties>
++            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++              <Dimension value="[500, 20]"/>
++            </Property>
++            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++              <Dimension value="[500, 20]"/>
++            </Property>
++            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++              <Dimension value="[500, 20]"/>
++            </Property>
++          </Properties>
++          <Constraints>
++            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
++              <GridBagConstraints gridX="-1" gridY="-1" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
++            </Constraint>
++          </Constraints>
++
++          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
++          <SubComponents>
++            <Component class="javax.swing.JTextField" name="searchTextField">
++              <Properties>
++                <Property name="text" type="java.lang.String" value="Search..."/>
++                <Property name="autoscrolls" type="boolean" value="false"/>
++                <Property name="inheritsPopupMenu" type="boolean" value="true"/>
++                <Property name="keymap" type="javax.swing.text.Keymap" editor="org.netbeans.modules.form.ComponentChooserEditor">
++                  <ComponentRef name="null"/>
++                </Property>
++                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
++                  <Insets value="[0, 0, 0, 0]"/>
++                </Property>
++                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++                  <Dimension value="[480, 20]"/>
++                </Property>
++                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++                  <Dimension value="[480, 20]"/>
++                </Property>
++                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++                  <Dimension value="[480, 20]"/>
++                </Property>
++                <Property name="requestFocusEnabled" type="boolean" value="false"/>
++              </Properties>
++              <Constraints>
++                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
++                  <GridBagConstraints gridX="0" gridY="0" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
++                </Constraint>
++              </Constraints>
++            </Component>
++            <Component class="javax.swing.JLabel" name="searchBtnLabel">
++              <Properties>
++                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
++                  <Image iconType="3" name="/search20x20.png"/>
++                </Property>
++                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
++                  <Color id="Hand Cursor"/>
++                </Property>
++                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++                  <Dimension value="[20, 20]"/>
++                </Property>
++                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++                  <Dimension value="[20, 20]"/>
++                </Property>
++                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++                  <Dimension value="[20, 20]"/>
++                </Property>
++              </Properties>
++              <Constraints>
++                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
++                  <GridBagConstraints gridX="1" gridY="0" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
++                </Constraint>
++              </Constraints>
++            </Component>
++          </SubComponents>
++        </Container>
++        <Container class="javax.swing.JPanel" name="contentPane">
++          <Properties>
++            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++              <Dimension value="[500, 350]"/>
++            </Property>
++            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++              <Dimension value="[500, 350]"/>
++            </Property>
++            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++              <Dimension value="[500, 350]"/>
++            </Property>
++          </Properties>
++          <Constraints>
++            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
++              <GridBagConstraints gridX="0" gridY="1" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
++            </Constraint>
++          </Constraints>
++
++          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
++          <SubComponents>
++            <Component class="javax.swing.JLabel" name="jLabel1">
++              <Properties>
++                <Property name="text" type="java.lang.String" value="Conteudo"/>
++              </Properties>
++              <Constraints>
++                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
++                  <GridBagConstraints gridX="-1" gridY="-1" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
++                </Constraint>
++              </Constraints>
++            </Component>
++          </SubComponents>
++        </Container>
++      </SubComponents>
++    </Container>
++    <Container class="javax.swing.JPanel" name="footerPane">
++      <Properties>
++        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++          <Dimension value="[500, 50]"/>
++        </Property>
++        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++          <Dimension value="[500, 50]"/>
++        </Property>
++        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++          <Dimension value="[500, 50]"/>
++        </Property>
++      </Properties>
++      <AccessibilityProperties>
++        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="footerPane"/>
++      </AccessibilityProperties>
++      <Constraints>
++        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
++          <GridBagConstraints gridX="0" gridY="2" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
++        </Constraint>
++      </Constraints>
++
++      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
++      <SubComponents>
++        <Component class="javax.swing.JLabel" name="footer">
++          <Properties>
++            <Property name="text" type="java.lang.String" value="Developed for a Software Testing project"/>
++            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++              <Dimension value="[450, 50]"/>
++            </Property>
++            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++              <Dimension value="[450, 50]"/>
++            </Property>
++            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++              <Dimension value="[450, 50]"/>
++            </Property>
++          </Properties>
++          <Constraints>
++            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
++              <GridBagConstraints gridX="-1" gridY="-1" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
++            </Constraint>
++          </Constraints>
++        </Component>
++        <Component class="javax.swing.JLabel" name="githubBtnLabel">
++          <Properties>
++            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
++              <Image iconType="3" name="/github50x50.png"/>
++            </Property>
++            <Property name="toolTipText" type="java.lang.String" value=""/>
++            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
++              <Color id="Hand Cursor"/>
++            </Property>
++            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++              <Dimension value="[50, 50]"/>
++            </Property>
++            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++              <Dimension value="[50, 50]"/>
++            </Property>
++            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
++              <Dimension value="[50, 50]"/>
++            </Property>
++          </Properties>
++          <Constraints>
++            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
++              <GridBagConstraints gridX="-1" gridY="-1" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
++            </Constraint>
++          </Constraints>
++        </Component>
++      </SubComponents>
++    </Container>
++  </SubComponents>
++</Form>
+diff --git a/src/main/java/com/mycompany/bookstore/gui/BookStoreGUI.java b/src/main/java/com/mycompany/bookstore/gui/BookStoreGUI.java
+new file mode 100644
+index 0000000..22b10dd
+--- /dev/null
++++ b/src/main/java/com/mycompany/bookstore/gui/BookStoreGUI.java
+@@ -0,0 +1,281 @@
++/*
++ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
++ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
++ */
++package com.mycompany.bookstore.gui;
++
++import java.awt.Desktop;
++import java.awt.event.MouseAdapter;
++import java.awt.event.MouseEvent;
++import java.io.IOException;
++import java.net.MalformedURLException;
++import java.net.URI;
++import java.net.URISyntaxException;
++import java.util.logging.Level;
++import java.util.logging.Logger;
++
++/**
++ *
++ * @author Chrystian Melo
++ */
++public class BookStoreGUI extends javax.swing.JFrame {
++
++    /**
++     * Creates new form BookStore
++     */
++    public BookStoreGUI() {
++        initComponents();
++        addListeners();
++    }
++
++    private void addListeners() {
++        cartIBtnLabel.addMouseListener(new MouseAdapter() {
++            @Override
++            public void mouseClicked(MouseEvent e) {
++
++            }
++        });
++        userBtnLabel.addMouseListener(new MouseAdapter() {
++            @Override
++            public void mouseClicked(MouseEvent e) {
++
++            }
++        });
++        searchBtnLabel.addMouseListener(new MouseAdapter() {
++            @Override
++            public void mouseClicked(MouseEvent e) {
++
++            }
++        });
++        githubBtnLabel.addMouseListener(new MouseAdapter() {
++            @Override
++            public void mouseClicked(MouseEvent e) {
++                try {
++                    Desktop.getDesktop().browse(new URI("https://github.com/ChrystianMelo/BookStore?tab=readme-ov-file#bookstore"));
++                } catch (MalformedURLException ex) {
++                    Logger.getLogger(BookStoreGUI.class.getName()).log(Level.SEVERE, null, ex);
++                } catch (URISyntaxException ex) {
++                    Logger.getLogger(BookStoreGUI.class.getName()).log(Level.SEVERE, null, ex);
++                } catch (IOException ex) {
++                    Logger.getLogger(BookStoreGUI.class.getName()).log(Level.SEVERE, null, ex);
++                }
++            }
++        });
++    }
++
++    /**
++     * This method is called from within the constructor to initialize the form.
++     * WARNING: Do NOT modify this code. The content of this method is always
++     * regenerated by the Form Editor.
++     */
++    @SuppressWarnings("unchecked")
++    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
++    private void initComponents() {
++        java.awt.GridBagConstraints gridBagConstraints;
++
++        headerPane = new javax.swing.JPanel();
++        titleLabel = new javax.swing.JLabel();
++        jPanel2 = new javax.swing.JPanel();
++        cartIBtnLabel = new javax.swing.JLabel();
++        userBtnLabel = new javax.swing.JLabel();
++        bodyPane = new javax.swing.JPanel();
++        searchPane = new javax.swing.JPanel();
++        searchTextField = new javax.swing.JTextField();
++        searchBtnLabel = new javax.swing.JLabel();
++        contentPane = new javax.swing.JPanel();
++        jLabel1 = new javax.swing.JLabel();
++        footerPane = new javax.swing.JPanel();
++        footer = new javax.swing.JLabel();
++        githubBtnLabel = new javax.swing.JLabel();
++
++        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
++        setMaximumSize(new java.awt.Dimension(550, 550));
++        setMinimumSize(new java.awt.Dimension(550, 550));
++        setPreferredSize(new java.awt.Dimension(550, 550));
++        setResizable(false);
++        setSize(new java.awt.Dimension(550, 550));
++        getContentPane().setLayout(new java.awt.GridBagLayout());
++
++        headerPane.setMaximumSize(new java.awt.Dimension(500, 50));
++        headerPane.setMinimumSize(new java.awt.Dimension(500, 50));
++        headerPane.setPreferredSize(new java.awt.Dimension(500, 50));
++        headerPane.setLayout(new java.awt.GridBagLayout());
++
++        titleLabel.setText("Book Store (v1.0)");
++        titleLabel.setMaximumSize(new java.awt.Dimension(250, 50));
++        titleLabel.setMinimumSize(new java.awt.Dimension(250, 50));
++        titleLabel.setPreferredSize(new java.awt.Dimension(250, 50));
++        headerPane.add(titleLabel, new java.awt.GridBagConstraints());
++
++        jPanel2.setMaximumSize(new java.awt.Dimension(250, 50));
++        jPanel2.setMinimumSize(new java.awt.Dimension(250, 50));
++        jPanel2.setPreferredSize(new java.awt.Dimension(250, 50));
++        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.TRAILING, 20, 0);
++        flowLayout1.setAlignOnBaseline(true);
++        jPanel2.setLayout(flowLayout1);
++
++        cartIBtnLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
++        cartIBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cart50x50.png"))); // NOI18N
++        cartIBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
++        cartIBtnLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
++        cartIBtnLabel.setMaximumSize(new java.awt.Dimension(50, 50));
++        cartIBtnLabel.setMinimumSize(new java.awt.Dimension(50, 50));
++        cartIBtnLabel.setPreferredSize(new java.awt.Dimension(50, 50));
++        jPanel2.add(cartIBtnLabel);
++
++        userBtnLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
++        userBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user50x50.png"))); // NOI18N
++        userBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
++        userBtnLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
++        userBtnLabel.setMaximumSize(new java.awt.Dimension(50, 50));
++        userBtnLabel.setMinimumSize(new java.awt.Dimension(50, 50));
++        userBtnLabel.setPreferredSize(new java.awt.Dimension(50, 50));
++        jPanel2.add(userBtnLabel);
++
++        gridBagConstraints = new java.awt.GridBagConstraints();
++        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
++        headerPane.add(jPanel2, gridBagConstraints);
++
++        gridBagConstraints = new java.awt.GridBagConstraints();
++        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
++        getContentPane().add(headerPane, gridBagConstraints);
++        headerPane.getAccessibleContext().setAccessibleName("headerPane");
++
++        bodyPane.setMaximumSize(new java.awt.Dimension(500, 400));
++        bodyPane.setMinimumSize(new java.awt.Dimension(500, 400));
++        bodyPane.setPreferredSize(new java.awt.Dimension(500, 400));
++        bodyPane.setLayout(new java.awt.GridBagLayout());
++
++        searchPane.setMaximumSize(new java.awt.Dimension(500, 20));
++        searchPane.setMinimumSize(new java.awt.Dimension(500, 20));
++        searchPane.setPreferredSize(new java.awt.Dimension(500, 20));
++        searchPane.setLayout(new java.awt.GridBagLayout());
++
++        searchTextField.setText("Search...");
++        searchTextField.setAutoscrolls(false);
++        searchTextField.setInheritsPopupMenu(true);
++        searchTextField.setKeymap(null);
++        searchTextField.setMargin(new java.awt.Insets(0, 0, 0, 0));
++        searchTextField.setMaximumSize(new java.awt.Dimension(480, 20));
++        searchTextField.setMinimumSize(new java.awt.Dimension(480, 20));
++        searchTextField.setPreferredSize(new java.awt.Dimension(480, 20));
++        searchTextField.setRequestFocusEnabled(false);
++        gridBagConstraints = new java.awt.GridBagConstraints();
++        gridBagConstraints.gridx = 0;
++        gridBagConstraints.gridy = 0;
++        searchPane.add(searchTextField, gridBagConstraints);
++
++        searchBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search20x20.png"))); // NOI18N
++        searchBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
++        searchBtnLabel.setMaximumSize(new java.awt.Dimension(20, 20));
++        searchBtnLabel.setMinimumSize(new java.awt.Dimension(20, 20));
++        searchBtnLabel.setPreferredSize(new java.awt.Dimension(20, 20));
++        gridBagConstraints = new java.awt.GridBagConstraints();
++        gridBagConstraints.gridx = 1;
++        gridBagConstraints.gridy = 0;
++        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
++        searchPane.add(searchBtnLabel, gridBagConstraints);
++
++        bodyPane.add(searchPane, new java.awt.GridBagConstraints());
++
++        contentPane.setMaximumSize(new java.awt.Dimension(500, 350));
++        contentPane.setMinimumSize(new java.awt.Dimension(500, 350));
++        contentPane.setPreferredSize(new java.awt.Dimension(500, 350));
++        contentPane.setLayout(new java.awt.GridBagLayout());
++
++        jLabel1.setText("Conteudo");
++        contentPane.add(jLabel1, new java.awt.GridBagConstraints());
++
++        gridBagConstraints = new java.awt.GridBagConstraints();
++        gridBagConstraints.gridx = 0;
++        gridBagConstraints.gridy = 1;
++        bodyPane.add(contentPane, gridBagConstraints);
++
++        gridBagConstraints = new java.awt.GridBagConstraints();
++        gridBagConstraints.gridx = 0;
++        gridBagConstraints.gridy = 1;
++        getContentPane().add(bodyPane, gridBagConstraints);
++        bodyPane.getAccessibleContext().setAccessibleName("bodyPane");
++
++        footerPane.setMaximumSize(new java.awt.Dimension(500, 50));
++        footerPane.setMinimumSize(new java.awt.Dimension(500, 50));
++        footerPane.setPreferredSize(new java.awt.Dimension(500, 50));
++        footerPane.setLayout(new java.awt.GridBagLayout());
++
++        footer.setText("Developed for a Software Testing project");
++        footer.setMaximumSize(new java.awt.Dimension(450, 50));
++        footer.setMinimumSize(new java.awt.Dimension(450, 50));
++        footer.setPreferredSize(new java.awt.Dimension(450, 50));
++        footerPane.add(footer, new java.awt.GridBagConstraints());
++
++        githubBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/github50x50.png"))); // NOI18N
++        githubBtnLabel.setToolTipText("");
++        githubBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
++        githubBtnLabel.setMaximumSize(new java.awt.Dimension(50, 50));
++        githubBtnLabel.setMinimumSize(new java.awt.Dimension(50, 50));
++        githubBtnLabel.setPreferredSize(new java.awt.Dimension(50, 50));
++        footerPane.add(githubBtnLabel, new java.awt.GridBagConstraints());
++
++        gridBagConstraints = new java.awt.GridBagConstraints();
++        gridBagConstraints.gridx = 0;
++        gridBagConstraints.gridy = 2;
++        getContentPane().add(footerPane, gridBagConstraints);
++        footerPane.getAccessibleContext().setAccessibleName("footerPane");
++
++        pack();
++        setLocationRelativeTo(null);
++    }// </editor-fold>//GEN-END:initComponents
++
++    /**
++     * @param args the command line arguments
++     */
++    public static void main(String args[]) {
++        /* Set the Nimbus look and feel */
++        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
++        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
++         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
++         */
++        try {
++            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
++                if ("Nimbus".equals(info.getName())) {
++                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
++                    break;
++                }
++            }
++        } catch (ClassNotFoundException ex) {
++            java.util.logging.Logger.getLogger(BookStoreGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
++        } catch (InstantiationException ex) {
++            java.util.logging.Logger.getLogger(BookStoreGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
++        } catch (IllegalAccessException ex) {
++            java.util.logging.Logger.getLogger(BookStoreGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
++        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
++            java.util.logging.Logger.getLogger(BookStoreGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
++        }
++        //</editor-fold>
++        //</editor-fold>
++
++        /* Create and display the form */
++        java.awt.EventQueue.invokeLater(new Runnable() {
++            public void run() {
++                new BookStoreGUI().setVisible(true);
++            }
++        });
++    }
++
++    // Variables declaration - do not modify//GEN-BEGIN:variables
++    private javax.swing.JPanel bodyPane;
++    private javax.swing.JLabel cartIBtnLabel;
++    private javax.swing.JPanel contentPane;
++    private javax.swing.JLabel footer;
++    private javax.swing.JPanel footerPane;
++    private javax.swing.JLabel githubBtnLabel;
++    private javax.swing.JPanel headerPane;
++    private javax.swing.JLabel jLabel1;
++    private javax.swing.JPanel jPanel2;
++    private javax.swing.JLabel searchBtnLabel;
++    private javax.swing.JPanel searchPane;
++    private javax.swing.JTextField searchTextField;
++    private javax.swing.JLabel titleLabel;
++    private javax.swing.JLabel userBtnLabel;
++    // End of variables declaration//GEN-END:variables
++}
+diff --git a/src/main/resources/cart50x50.png b/src/main/resources/cart50x50.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbd17eb6c78ed52d4e0caa7b916559eb08da3944
+GIT binary patch
+literal 773
+zcmV+g1N!`lP)<h;3K|Lk000e1NJLTq001xm001xu1^@s6R|5Hm00009a7bBm000ie
+z000ie0hKEb8vp<Tw@E}nRA}DqnM-ICK@f(&jV8+aAOywWBUd#jg825JM7;zAh4?sx
+z;6+f3UIalrc#a4n_&_g$;zf{viWl*yL{=gS9wfH}aZOZ2)VOMPJfs$yqGz2~&rV=|
+z7<P82ySo3bn!l=hAxDlJGa3c?TnQ}mY4Zyx0e`Ye;w(@FygJt~FfXeFz6pUE3BUVe
+zStT$Mkibw@32X*l0%di5QejjDI%m=g-U3W0ZwzErh5T?CI4SKs-~-SBOsRG|fi7TH
+zigO<YZvC&(dW%AJt2W(2$ZNoLHwe==MhJPpJ@x#000F3XAGKc<s01N!S`9V{v>DHP
+z8%W?)Apn6Tz!=bM{MHX#HNGDKb^}cgW4;MEsNUQ2K|4QG>`M(0oGlg)tPR?^$C4A)
+zq)cEy&0!===Q&1VtFgbBGJ$u>0~f*?xS|M@f!QfdzSHs&Zw+f?qeX}JrbOVJ8uxuv
+z!FX$|L>0K75`mKPz_qA`&L{#EV3Fg=uaHb{64(>f*izY<neII0m_WZ8?~BSwq48L)
+z#;{`oPnCGwj%)CcMG@9HntU7ZTM^hF*XUevqv_U5jtKOraee^BBn;~cbUbcc`e0Cv
+zGw8A|*_ZI-i?ZV8IDNWN)J!@gseP4E9iEUAj-;?bh09+lDib|Vic`yn-48rTIzE@n
+zs-#8WxC@oIlhWR|47A!N5Vx8<Duq=KFyFxfRe{&Ct^G=l45E;bog%PZ;`N!FTtr2?
+zNa(nf(Vpu?=mI_(s!;}Z#3<J*hVr}+Le9_%e72~@1h62atzFpvr+DO&z=1lt9kyz`
+z>5~VhfQ5dY;>u`CooCGn*($g^JZJ}gTHO8}SRBEdwj}o4^-J8#^dEsWmrnwRBig#5
+zLTD6Nora8dFn!GK$(D00hOJG&Hj&W>;>{d6a`@mMx0bb$JSkvA00000NkvXXu0mjf
+D#qCs@
+
+literal 0
+HcmV?d00001
+
+diff --git a/src/main/resources/github50x50.png b/src/main/resources/github50x50.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..a93c9b12c1d00cc8e5f91356030c218f12f31aa6
+GIT binary patch
+literal 1047
+zcmV+y1nB#TP)<h;3K|Lk000e1NJLTq001xm001xu1^@s6R|5Hm00009a7bBm000ie
+z000ie0hKEb8vp<U$w@>(RA}DinM+6&Q5eU6%DtANrKtrz%CJRfk4;2v!XjEkK~%2F
+z+O!Ilvd2cHwLuFNEf7M2h#=fVL4?$zphQW7US?zw6g}*r_xil|w)uo<ntSHVICm!K
+zgTdpSGw1xjbH4LE{wED@qy(q}HUpJF8Bhph$@?hq1sDaM1AV|f-~$0l0nh;S192cB
+ze|6h&U_izw@Dq43&>^ep6tq=4A!BvO*eR0?pb3b`q^Wo!K(ox{sZ;=i7AD};4w!!%
+zlC$KA9010X*l?;8h|8P@7Ye=(h^5eE?4Fola1CCyTB+UvW4q3c*~I=K1!96pODe_w
+zthV$!@Yyhdmroq{Dgn>x{kS+2TUR-xSdHz{ZxwJFc<aFqd=%HYM#e5z^c}QwvCWFf
+z#(|Kje;B9*zDb`s;5BduxB_%afa(TrNg6RDV@7~RAkzZJD}~}sstBtJQvC|WR{*<!
+z91RoA1h&aaCzBqVU}qVzJ8ZVQ*T;0_vJI9FtHjJMx9Rgyfg3hhqUHp!LBmUoi_QBX
+z!y0%Rj34Nv#GinCAHau!mm1!y-&l;qHGK4LA5CbZcq=<hB>*)VKKph61=B?hT!#VL
+zH9GDIK!J4{xY`i+sM@M&U~xcY>w6n)y&);U6Y@ctMSBF83P^!xV&`c|FqVacJy6M5
+zfW(2_+=U^bKGF<7n%n6CDv)l#V}&s*q}ZPMc5Z+Q<O+sl7zs&ol&u(~G(ZJb+Psef
+zywM2T<pF@t)CguHA))(LD@+Jrrzq;DREdSCOlVX$kUa=s2d--1YMoCdbn4X|K7wDX
+zVLl1qkTIFF%SMNRr9Ne&4>hvU7*I6-(ST+FejiwpV*d5ICYC=6tWyr?j~Bq!6o9V;
+z9y!2q!mgz30geJK!UvgG;wG?nfr(yNJlr*4)&U(8u_~_2Mg3!gjg?AbWyQ=z#I#z0
+zEgGQL0~dh1z)zQaQoD*)F?JjSHqB>#zz+qr_)e2n2@83az#SnrVLZH6#Fp9CMhyqI
+zMp1sAbznM27C=EZxuF)%8~Pjrewq4A0~;JDQ0#ICY^lX$<n9EJXXuj$R0GF>eZVpo
+z2YA-u%4?CkDtf)sW4Af!kY0CuTT^Q>SeHfxrz=wq6sUJQNiBb0F-?iv>=IU>TmH{*
+zp@7a6Q~g3$YCn3Hd`<(}jE1|c_R3x>fG0KzWVtxR$rN}hypZQvVxz2#)pln)9M9_Z
+zGYXso7Ns)XEs{_kF|A&X!*S*et3C-_^1J@d2TsZXZgcT{i&T1NfaUzJ@*Dj!gq<C`
+RVc7rx002ovPDHLkV1kXQ&W`{9
+
+literal 0
+HcmV?d00001
+
+diff --git a/src/main/resources/search20x20.png b/src/main/resources/search20x20.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..9045896db982dc6802e87cfa5f8a9bb71f280d6f
+GIT binary patch
+literal 745
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!63?wyl`GXl47?%h5gt)pF_y9#<fDy(3N;ARP
+z(lRn|wy}u`gw4Uh31mb>MzOH6I=Q+zyLrIXczSxVv$LzHYrsWVSXh{tKn8Mgft&;f
+zY;0_BHbdHK23;S9;I4>+H;YS3ySjVk&Yyqu<e3#KR~|lf&Y*tg+<Eg>?m8q@Gplgx
+z$+q^6%$560HeX!3X{+P5OAgyEMIF2~?cCkf8@Ehdw`1L&!wc`cOgMbI?92m(ihaCU
+z3%LSo?K>8@EkDHInRn*mmBrik9lm_K{PcaV-PdN{da>~G!&w`4lrP*^dG<lmg+~l7
+znE`vRmzS5@FWMKn<I?`4Cn68tOh0xfW$)D`dya0~u`_tzjphrFS}#7%SiZ-9@Ac*j
+zkE@n#O`5vQbN4ldl3mlz+-bY`xO~g;UAuQ*zxSxJvhvKi^Vc6doqzcugF|Xm|3dd&
+zS6f<JC41LdZM(c=<93O;2UMnP-mrCNPyfWtJ9aY^Y-31W!C)D~pzY2eXT#u7$PhYN
+z)5=i<7*cvAL4LsuwuwI5D{5F)PfFo==ob|AURCO6`oACl{v{Xk{n+$%ieuf5jq-bz
+zN){~M#Td+7Yq8f1sPnL=i(`ny<>Z8fgn$X*L17_@4UCyLH+|~5BqXV+5g%=;yM4zd
+z18q}37NrHj(Q_vSPnjtwuX2D_>_X1k)t>%FJ*8U=(%85&Oiiw(TT8dyik@B2$a-bg
+z>`#*y@3EQtC#Uitlay{H=S8_h#eag2oDvvIcOLPWT_A349&YGYwxMH5%gUWos~0$L
+z@MmCmY3V<H;!IG;jqvl<Y+8rToj9U@VrBk<@Bmg(#_l2p*IQOMBm!J+RYyonaJAaK
+hJ3?}T>y3zrQpS~H8bSNE1X+QSjHj!g%Q~loCIHS5C9D7d
+
+literal 0
+HcmV?d00001
+
+diff --git a/src/main/resources/user50x50.png b/src/main/resources/user50x50.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..95efaa7ff5e0e3bf56041692d196f44f512d519b
+GIT binary patch
+literal 1515
+zcmZWo2~bm46wO8mVQDZmTA=KN1_A^~LPC%MB|vJVEMc*=g3uxqq+zX6$}}Wp5v;fn
+zD4<g|0V~Qf4k)xzKwxB>($=OBqHI&q)>@!!F71^!lX1p7lbdtzIq&@Q|4)j7g8~f6
+zCS(i-V<-yr3x#ji%MS?;Jw~l}9fQH02^LF)0aEdv?J_qv_xAP%2ptt*8yg$MLigG(
+zpacQ|S^|I_8hJb(P@bNiXvyC$bP6bR7LBhu0QLG3#9S^Hbu9}3IRilPpaZtBumGjK
+zy}h-yHH;9LPNzFMI>Hk4-~$u@TU%QP2L}+aSS*MJ8^9b62SxyHZf;B_Q+r(iuta+h
+zgT~$69Y(l26bwc<3o>BYY&HON<1hk%uC;<wTDO;u+u@-j+4kb)?LZzVSi%PBArD~f
+zb%BLv1<ufs5<NOsS69$Leh@o5J45&I@BjzUp#G{SP$)J~C^@j8gaUxBg)l?{0bnph
+zp3vcxwt&^f)-J&uo(A~92I;{8VF0L*7+CGAhZn?PFi;ZkTs+0fhu`Q_MrcqNrmleU
+zVx?fE?geFSW2-FhY0|`d%XN}Jq|XH-tpwdwDM8l%{NkGBv@l|!es%Ai^=cdqKXXDh
+z-W>moBT}SL(sZz1I=Gz|(p<;_3Rz)B9hMPxCb^iJ`AaBE?pQY7`2mM2*Vmn@4|B1}
+zvZmt3LKP8%CoV*vy+1|3pV72tUu=vY`UcxX%<%N22KXn}>;8qsnf{60)TuQcvHNyJ
+znWsxuIT_=PqZ?~XXH)Fdsr<3~%)jj%OafhhQOEqY`+a?~-nA#;qT|chOAa*!H;GRx
+zC{QyYl|=Xpx`_OIC4ob6F}=hTm1=5A{gLI4-Bkyp?#=aNj!gB9R*)9Ym1Xb`Y+g}(
+z)v_VxXO=CHnj?43N$$#1SI>W{*E}D2E2Qe^oP_Y%CCk%mIXMp_6PglhPbOSWywX?a
+zTOic`FtAvt+nLQMyIzr}FUd~*q;&Rh0fRT=LoDBtXhbSS$8mgW0%e{#NU#24zd->p
+zSBXjPGiE;Hv76EaN2pngYrQqTk^#f2){eq=j0|&dxhlo?Ivdi2Ckx^}x>@dsab!>G
+zyD?N{*P?vizS=G}_sG%$<&bOn;N)orPu4&<I{BcgEtzps^^-h|EN%SZS7uU4u&`vj
+z&8)ZFik3QlFmLo$j%>w2W7auY`mrXBu-@Zcd|6K>Zn0z)TU4$b2r_Lw<W(HKslNS)
+zZ&zGvRqZr1Aw7H}Bb3&;Je*}tt9hKG=xqzjx953;(_$m9Mmf9uu97=v`?YQ<bB(zF
+z3U;L_8)D84563Nr^uDR-kbmCKHVYa%7T4S)qzXp6kGZ5wWOCB8?$#8NRvu5E^4NID
+z|E}~#chtH?pM~aar|O2l*^cmBK~1RV9(OKrJaJJi?lLc&Gst(HPcn(8hNKgU`scj9
+z?kK9L6qWw0bBEkr=2Jqv_Q6`P^1qhgSa#RFc6qxhWphW}kFzw>^S1~3geAmy8okSK
+zAo0s-pZ0v;rTRw$30?UMw)>5Y{EaB_3qAoPrJb6Xo)wWr!NrpBZ&{^}%1&a>(sQtH
+T{8M27e-MmF802?#Z%p3*bY2kJ
+
+literal 0
+HcmV?d00001
+
+diff --git a/src/main/resources/user_icon.png b/src/main/resources/user_icon.png
+deleted file mode 100644
+index ff20a20a60b43063d8751b5da57670210804453a..0000000000000000000000000000000000000000
+GIT binary patch
+literal 0
+HcmV?d00001
+
+literal 11096
+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
+
+-- 
+2.36.1.windows.1
+
