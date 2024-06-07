@@ -12,6 +12,11 @@ import java.util.HashMap;
 public class BookStore {
 
     /**
+     * Usuário
+     */
+    private User user;
+
+    /**
      * Lista de clientes da livraria.
      */
     private ArrayList<Customer> costumers;
@@ -28,6 +33,8 @@ public class BookStore {
     public BookStore() {
         costumers = new ArrayList<>();
         suppliers = new ArrayList<>();
+
+        recoverUser();
     }
 
     /**
@@ -84,6 +91,13 @@ public class BookStore {
      */
     public void setCostumers(ArrayList<Customer> costumers) {
         this.costumers = costumers;
+    }
+
+    /**
+     * Retorna o usuário.
+     */
+    public User getUser() {
+        return user;
     }
 
     /**
@@ -144,5 +158,13 @@ public class BookStore {
         });
 
         return availableBooks;
+    }
+
+    /**
+     * Pendente API banco de dados
+     */
+    public User recoverUser() {
+        return new Customer("username", "Costumer Name", new Address("Street", 123, "Neighborhood", "City", "State", "Country", "Complement"));
+        //return new Supplier("username", "Supplier Name", new Address("Street", 123, "Neighborhood", "City", "State", "Country", "Complement"));
     }
 }

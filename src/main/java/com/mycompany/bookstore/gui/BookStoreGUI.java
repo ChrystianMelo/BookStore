@@ -4,6 +4,7 @@
  */
 package com.mycompany.bookstore.gui;
 
+import com.mycompany.bookstore.*;
 import java.awt.Desktop;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -22,28 +23,58 @@ import javax.imageio.ImageIO;
 public class BookStoreGUI extends javax.swing.JFrame {
 
     /**
+     * Livraria.
+     */
+    private final BookStore store;
+
+    /**
      * Creates new form BookStore
      */
-    public BookStoreGUI() {
+    public BookStoreGUI(BookStore store) {
         initComponents();
-
         try {
             setIconImage(ImageIO.read(BookStoreGUI.class.getResourceAsStream("/icon50x50.png")));
         } catch (IOException ex) {
             Logger.getLogger(BookStoreGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         addListeners();
+
+        this.store = store;
+
+        User user = this.store.getUser();
+
+        boolean isSupplier = user instanceof Supplier;
+        if (!isSupplier) {
+            contentPane.add(new CustomerPanel());
+
+            stockBtnLabel.setVisible(false);
+            stockBtnLabel.setOpaque(false);
+        } else {
+            contentPane.add(new SupplierPanel());
+
+            cartIBtnLabel.setVisible(false);
+            cartIBtnLabel.setOpaque(false);
+        }
+
     }
 
+    /**
+     *
+     */
     private void addListeners() {
+        userBtnLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+        });
         cartIBtnLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
 
             }
         });
-        userBtnLabel.addMouseListener(new MouseAdapter() {
+        stockBtnLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
 
@@ -83,6 +114,7 @@ public class BookStoreGUI extends javax.swing.JFrame {
 
         headerPane = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        stockBtnLabel = new javax.swing.JLabel();
         cartIBtnLabel = new javax.swing.JLabel();
         userBtnLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -93,7 +125,6 @@ public class BookStoreGUI extends javax.swing.JFrame {
         searchTextField = new javax.swing.JTextField();
         searchBtnLabel = new javax.swing.JLabel();
         contentPane = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         footerPane = new javax.swing.JPanel();
         footer = new javax.swing.JLabel();
         githubBtnLabel = new javax.swing.JLabel();
@@ -115,21 +146,27 @@ public class BookStoreGUI extends javax.swing.JFrame {
         jPanel2.setMaximumSize(new java.awt.Dimension(250, 50));
         jPanel2.setMinimumSize(new java.awt.Dimension(250, 50));
         jPanel2.setPreferredSize(new java.awt.Dimension(250, 50));
-        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.TRAILING, 20, 0);
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.TRAILING, 0, 0);
         flowLayout1.setAlignOnBaseline(true);
         jPanel2.setLayout(flowLayout1);
 
+        stockBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cloud30x30.png"))); // NOI18N
+        stockBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        stockBtnLabel.setOpaque(true);
+        jPanel2.add(stockBtnLabel);
+
         cartIBtnLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        cartIBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cart50x50.png"))); // NOI18N
+        cartIBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cart30x30.png"))); // NOI18N
         cartIBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cartIBtnLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cartIBtnLabel.setMaximumSize(new java.awt.Dimension(50, 50));
         cartIBtnLabel.setMinimumSize(new java.awt.Dimension(50, 50));
+        cartIBtnLabel.setOpaque(true);
         cartIBtnLabel.setPreferredSize(new java.awt.Dimension(50, 50));
         jPanel2.add(cartIBtnLabel);
 
         userBtnLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        userBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user50x50.png"))); // NOI18N
+        userBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user30x30.png"))); // NOI18N
         userBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         userBtnLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         userBtnLabel.setMaximumSize(new java.awt.Dimension(50, 50));
@@ -147,14 +184,14 @@ public class BookStoreGUI extends javax.swing.JFrame {
         jPanel1.setMaximumSize(new java.awt.Dimension(250, 50));
         jPanel1.setMinimumSize(new java.awt.Dimension(250, 50));
         jPanel1.setPreferredSize(new java.awt.Dimension(250, 50));
-        java.awt.FlowLayout flowLayout2 = new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 20, 0);
+        java.awt.FlowLayout flowLayout2 = new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 0, 0);
         flowLayout2.setAlignOnBaseline(true);
         jPanel1.setLayout(flowLayout2);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon50x50.png"))); // NOI18N
         jPanel1.add(jLabel2);
 
-        jLabel3.setText("Book Store (v1.0)");
+        jLabel3.setText(" Book Store");
         jPanel1.add(jLabel3);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -204,14 +241,11 @@ public class BookStoreGUI extends javax.swing.JFrame {
 
         bodyPane.add(searchPane, new java.awt.GridBagConstraints());
 
+        contentPane.setToolTipText("");
         contentPane.setMaximumSize(new java.awt.Dimension(500, 350));
         contentPane.setMinimumSize(new java.awt.Dimension(500, 350));
         contentPane.setPreferredSize(new java.awt.Dimension(500, 350));
         contentPane.setLayout(new java.awt.GridBagLayout());
-
-        jLabel1.setText("Conteudo");
-        contentPane.add(jLabel1, new java.awt.GridBagConstraints());
-
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -252,42 +286,6 @@ public class BookStoreGUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BookStoreGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BookStoreGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BookStoreGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BookStoreGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new BookStoreGUI().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bodyPane;
     private javax.swing.JLabel cartIBtnLabel;
@@ -296,7 +294,6 @@ public class BookStoreGUI extends javax.swing.JFrame {
     private javax.swing.JPanel footerPane;
     private javax.swing.JLabel githubBtnLabel;
     private javax.swing.JPanel headerPane;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
@@ -304,6 +301,7 @@ public class BookStoreGUI extends javax.swing.JFrame {
     private javax.swing.JLabel searchBtnLabel;
     private javax.swing.JPanel searchPane;
     private javax.swing.JTextField searchTextField;
+    private javax.swing.JLabel stockBtnLabel;
     private javax.swing.JLabel userBtnLabel;
     // End of variables declaration//GEN-END:variables
 }
