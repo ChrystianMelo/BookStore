@@ -13,6 +13,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -25,6 +26,13 @@ public class BookStoreGUI extends javax.swing.JFrame {
      */
     public BookStoreGUI() {
         initComponents();
+
+        try {
+            setIconImage(ImageIO.read(BookStoreGUI.class.getResourceAsStream("/icon50x50.png")));
+        } catch (IOException ex) {
+            Logger.getLogger(BookStoreGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         addListeners();
     }
 
@@ -74,10 +82,12 @@ public class BookStoreGUI extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         headerPane = new javax.swing.JPanel();
-        titleLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         cartIBtnLabel = new javax.swing.JLabel();
         userBtnLabel = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         bodyPane = new javax.swing.JPanel();
         searchPane = new javax.swing.JPanel();
         searchTextField = new javax.swing.JTextField();
@@ -89,6 +99,7 @@ public class BookStoreGUI extends javax.swing.JFrame {
         githubBtnLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Book Store - Library Management System");
         setMaximumSize(new java.awt.Dimension(550, 550));
         setMinimumSize(new java.awt.Dimension(550, 550));
         setPreferredSize(new java.awt.Dimension(550, 550));
@@ -100,12 +111,6 @@ public class BookStoreGUI extends javax.swing.JFrame {
         headerPane.setMinimumSize(new java.awt.Dimension(500, 50));
         headerPane.setPreferredSize(new java.awt.Dimension(500, 50));
         headerPane.setLayout(new java.awt.GridBagLayout());
-
-        titleLabel.setText("Book Store (v1.0)");
-        titleLabel.setMaximumSize(new java.awt.Dimension(250, 50));
-        titleLabel.setMinimumSize(new java.awt.Dimension(250, 50));
-        titleLabel.setPreferredSize(new java.awt.Dimension(250, 50));
-        headerPane.add(titleLabel, new java.awt.GridBagConstraints());
 
         jPanel2.setMaximumSize(new java.awt.Dimension(250, 50));
         jPanel2.setMinimumSize(new java.awt.Dimension(250, 50));
@@ -133,8 +138,29 @@ public class BookStoreGUI extends javax.swing.JFrame {
         jPanel2.add(userBtnLabel);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         headerPane.add(jPanel2, gridBagConstraints);
+
+        jPanel1.setAutoscrolls(true);
+        jPanel1.setMaximumSize(new java.awt.Dimension(250, 50));
+        jPanel1.setMinimumSize(new java.awt.Dimension(250, 50));
+        jPanel1.setPreferredSize(new java.awt.Dimension(250, 50));
+        java.awt.FlowLayout flowLayout2 = new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 20, 0);
+        flowLayout2.setAlignOnBaseline(true);
+        jPanel1.setLayout(flowLayout2);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon50x50.png"))); // NOI18N
+        jPanel1.add(jLabel2);
+
+        jLabel3.setText("Book Store (v1.0)");
+        jPanel1.add(jLabel3);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        headerPane.add(jPanel1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -271,11 +297,13 @@ public class BookStoreGUI extends javax.swing.JFrame {
     private javax.swing.JLabel githubBtnLabel;
     private javax.swing.JPanel headerPane;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel searchBtnLabel;
     private javax.swing.JPanel searchPane;
     private javax.swing.JTextField searchTextField;
-    private javax.swing.JLabel titleLabel;
     private javax.swing.JLabel userBtnLabel;
     // End of variables declaration//GEN-END:variables
 }
