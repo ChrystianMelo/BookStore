@@ -6,15 +6,18 @@ package com.mycompany.bookstore.gui;
 
 import com.mycompany.bookstore.*;
 import java.awt.Desktop;
+import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 /**
@@ -27,38 +30,57 @@ public class BookStoreGUI extends javax.swing.JFrame {
      */
     private final BookStore store;
 
-    private final JPanel userPanel;
+    /**
+     *
+     */
+    private JPanel userPanel;
 
     /**
      * Creates new form BookStore
      */
     public BookStoreGUI(BookStore store) {
         initComponents();
+        addListeners();
         try {
             setIconImage(ImageIO.read(BookStoreGUI.class.getResourceAsStream("/icon50x50.png")));
         } catch (IOException ex) {
             Logger.getLogger(BookStoreGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        addListeners();
 
         this.store = store;
 
-        User user = this.store.getUser();
+        revalidate();
+        repaint();
 
-        boolean isSupplier = user instanceof Supplier;
-        if (!isSupplier) {
-            userPanel = new CustomerPanel();
+    }
+
+    @Override
+    public void repaint() {
+
+        if (store.getUser() instanceof Customer) {
+            userPanel = new CustomerPanel(store);
 
             stockBtnLabel.setVisible(false);
             stockBtnLabel.setOpaque(false);
+
+            cartIBtnLabel.setVisible(true);
+            cartIBtnLabel.setOpaque(true);
         } else {
-            userPanel = new SupplierPanel();
+            userPanel = new SupplierPanel(store);
+
+            stockBtnLabel.setVisible(true);
+            stockBtnLabel.setOpaque(true);
 
             cartIBtnLabel.setVisible(false);
             cartIBtnLabel.setOpaque(false);
         }
 
+        contentPane.removeAll();
         contentPane.add(userPanel);
+        contentPane.revalidate();
+        contentPane.repaint();
+
+        super.repaint();
     }
 
     /**
@@ -68,27 +90,79 @@ public class BookStoreGUI extends javax.swing.JFrame {
         userBtnLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                LoginDialog login = new LoginDialog(BookStoreGUI.this, true);
+                login.setVisible(true);
+
+                User user = login.getUser();
+                if (user != null) {
+                    store.setUser(user);
+
+                    try {
+                        if (user instanceof Customer) {
+                            store.addCostumer((Customer) user);
+                        } else {
+                            store.addSupplier((Supplier) user);
+                        }
+                    } catch (Exception ex) {
+                        Logger.getLogger(BookStoreGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    revalidate();
+                    repaint();
+                }
 
             }
         });
+
         cartIBtnLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                User user = store.getUser();
+                assert (user instanceof Customer);
 
+                Customer customer = (Customer) user;
+
+                JDialog dialog = new JDialog(BookStoreGUI.this, "Cart", true);
+                dialog.setLayout(new FlowLayout());
+                dialog.setSize(500, 400);
+                dialog.add(new BookList(new ArrayList<>(customer.getCart().getBooks().keySet())));
+
+                dialog.setVisible(true);
             }
         });
+
         stockBtnLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                User user = store.getUser();
+                assert (user instanceof Supplier);
 
+                Supplier supplier = (Supplier) user;
+
+                BookRegisterDialog login = new BookRegisterDialog(BookStoreGUI.this, true);
+                login.setVisible(true);
+
+                Book book = login.getBook();
+                if (book != null) {
+                    try {
+                        supplier.registerBook(book, 1);
+                    } catch (Exception ex) {
+                        Logger.getLogger(BookStoreGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+                revalidate();
+                repaint();
             }
         });
+
         searchBtnLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 //userPanel.setFilter(null);
             }
         });
+
         githubBtnLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

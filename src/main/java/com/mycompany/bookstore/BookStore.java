@@ -47,6 +47,8 @@ public class BookStore {
     public BookStore(ArrayList<Customer> costumers, ArrayList<Supplier> suppliers) {
         this.costumers = costumers;
         this.suppliers = suppliers;
+
+        recoverUser();
     }
 
     /**
@@ -98,6 +100,13 @@ public class BookStore {
      */
     public User getUser() {
         return user;
+    }
+
+    /**
+     * Define o usuário.
+     */
+    public void setUser(User user) {
+        this.user = user;
     }
 
     /**
@@ -163,8 +172,8 @@ public class BookStore {
     /**
      * Pendente API banco de dados
      */
-    public User recoverUser() {
-        return new Customer("username", "Costumer Name", new Address("Street", 123, "Neighborhood", "City", "State", "Country", "Complement"));
+    private void recoverUser() {
+        user = new Customer("username", "Costumer Name", new Address("Street", 123, "Neighborhood", "City", "State", "Country", "Complement"));
         //return new Supplier("username", "Supplier Name", new Address("Street", 123, "Neighborhood", "City", "State", "Country", "Complement"));
     }
 }
