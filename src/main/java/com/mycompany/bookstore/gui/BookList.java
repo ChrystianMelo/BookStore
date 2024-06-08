@@ -5,31 +5,12 @@
 package com.mycompany.bookstore.gui;
 
 import com.mycompany.bookstore.*;
-import java.awt.Component;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.ListCellRenderer;
-
-// Renderer personalizado para JList<JPanel>
-class PanelRenderer implements ListCellRenderer<JPanel> {
-
-    @Override
-    public Component getListCellRendererComponent(JList<? extends JPanel> list, JPanel value, int index, boolean isSelected, boolean cellHasFocus) {
-        if (isSelected) {
-            value.setBackground(value.getBackground().darker());
-        } else {
-            value.setBackground(value.getBackground().brighter());
-        }
-        return value;
-    }
-}
 
 /**
  *
- * @author Chrystian Melo
  */
 public class BookList extends javax.swing.JPanel {
 

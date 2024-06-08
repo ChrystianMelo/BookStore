@@ -15,10 +15,10 @@ import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 /**
  *
- * @author Chrystian Melo
  */
 public class BookStoreGUI extends javax.swing.JFrame {
 
@@ -26,6 +26,8 @@ public class BookStoreGUI extends javax.swing.JFrame {
      * Livraria.
      */
     private final BookStore store;
+
+    private final JPanel userPanel;
 
     /**
      * Creates new form BookStore
@@ -45,17 +47,18 @@ public class BookStoreGUI extends javax.swing.JFrame {
 
         boolean isSupplier = user instanceof Supplier;
         if (!isSupplier) {
-            contentPane.add(new CustomerPanel());
+            userPanel = new CustomerPanel();
 
             stockBtnLabel.setVisible(false);
             stockBtnLabel.setOpaque(false);
         } else {
-            contentPane.add(new SupplierPanel());
+            userPanel = new SupplierPanel();
 
             cartIBtnLabel.setVisible(false);
             cartIBtnLabel.setOpaque(false);
         }
 
+        contentPane.add(userPanel);
     }
 
     /**
@@ -83,7 +86,7 @@ public class BookStoreGUI extends javax.swing.JFrame {
         searchBtnLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                //userPanel.setFilter(null);
             }
         });
         githubBtnLabel.addMouseListener(new MouseAdapter() {

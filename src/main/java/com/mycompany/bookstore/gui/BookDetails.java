@@ -9,7 +9,6 @@ import java.awt.FlowLayout;
 
 /**
  *
- * @author Chrystian Melo
  */
 public class BookDetails extends javax.swing.JPanel {
 

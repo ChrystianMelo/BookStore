@@ -8,7 +8,6 @@ import java.awt.FlowLayout;
 
 /**
  *
- * @author Chrystian Melo
  */
 public class CustomerPanel extends javax.swing.JPanel {
 
