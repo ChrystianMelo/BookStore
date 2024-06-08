@@ -5,9 +5,12 @@
 package com.mycompany.bookstore.gui;
 
 import com.mycompany.bookstore.*;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
 
 /**
  *
@@ -25,8 +28,18 @@ public class BookList extends javax.swing.JPanel {
         listModel.addElement(new BookDetails(new Book()));
         listModel.addElement(new BookDetails(new Book()));
 
-        jList2.setLayout(new FlowLayout());
+        FlowLayout layoyt = new FlowLayout();
+        layoyt.setAlignment(FlowLayout.LEADING);
+        jList2.setLayout(layoyt);
+
         jList2.setModel(listModel);
+        jList2.setCellRenderer(new ListCellRenderer<BookDetails>() {
+            @Override
+            public Component getListCellRendererComponent(JList<? extends BookDetails> list, BookDetails bookDetails, int index, boolean isSelected, boolean cellHasFocus) {
+                return new BookDetails(new Book());
+            }
+        });
+
         jList2.revalidate();
         jList2.repaint();
     }

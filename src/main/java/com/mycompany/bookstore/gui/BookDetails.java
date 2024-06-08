@@ -5,7 +5,6 @@
 package com.mycompany.bookstore.gui;
 
 import com.mycompany.bookstore.Book;
-import java.awt.FlowLayout;
 
 /**
  *
@@ -17,9 +16,7 @@ public class BookDetails extends javax.swing.JPanel {
      */
     public BookDetails(Book book) {
         initComponents();
-        setLayout(new FlowLayout());
-        //titleLabel.setText(book.getName());
-        titleLabel.setText("TitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitle");
+        titleLabel.setText(book.getName());
     }
 
     /**
