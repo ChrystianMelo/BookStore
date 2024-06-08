@@ -4,7 +4,10 @@
  */
 package com.mycompany.bookstore.gui;
 
+import com.mycompany.bookstore.BookStore;
+import com.mycompany.bookstore.Supplier;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,14 +17,15 @@ public class SupplierPanel extends javax.swing.JPanel {
     /**
      * Creates new form CostumerPanel
      */
-    public SupplierPanel() {
+    public SupplierPanel(BookStore store) {
         initComponents();
 
         salesPane.setLayout(new FlowLayout());
-        salesPane.add(new BookList(null));
+        salesPane.add(new BookList(new ArrayList<>()));
 
         stockPane.setLayout(new FlowLayout());
-        stockPane.add(new BookList(null));
+        Supplier supplier = (Supplier) store.getUser();
+        stockPane.add(new BookList(new ArrayList<>(supplier.getEstoque().keySet())));
     }
 
     /**

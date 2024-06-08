@@ -4,7 +4,10 @@
  */
 package com.mycompany.bookstore.gui;
 
+import com.mycompany.bookstore.BookStore;
+import com.mycompany.bookstore.Customer;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,14 +17,15 @@ public class CustomerPanel extends javax.swing.JPanel {
     /**
      * Creates new form CostumerPanel
      */
-    public CustomerPanel() {
+    public CustomerPanel(BookStore store) {
         initComponents();
 
         allBooksPane.setLayout(new FlowLayout());
-        allBooksPane.add(new BookList(null));
+        allBooksPane.add(new BookList(new ArrayList<>(store.getAvailableBooks().keySet())));
 
         starredBooksPane.setLayout(new FlowLayout());
-        starredBooksPane.add(new BookList(null));
+        Customer customer = (Customer) store.getUser();
+        starredBooksPane.add(new BookList(customer.getFavorites()));
     }
 
     /**

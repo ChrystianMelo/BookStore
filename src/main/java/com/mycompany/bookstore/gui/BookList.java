@@ -24,9 +24,9 @@ public class BookList extends javax.swing.JPanel {
         initComponents();
 
         DefaultListModel<BookDetails> listModel = new DefaultListModel<>();
-        listModel.addElement(new BookDetails(new Book()));
-        listModel.addElement(new BookDetails(new Book()));
-        listModel.addElement(new BookDetails(new Book()));
+        for (Book b : books) {
+            listModel.addElement(new BookDetails(b));
+        }
 
         FlowLayout layoyt = new FlowLayout();
         layoyt.setAlignment(FlowLayout.LEADING);
@@ -36,7 +36,7 @@ public class BookList extends javax.swing.JPanel {
         jList2.setCellRenderer(new ListCellRenderer<BookDetails>() {
             @Override
             public Component getListCellRendererComponent(JList<? extends BookDetails> list, BookDetails bookDetails, int index, boolean isSelected, boolean cellHasFocus) {
-                return new BookDetails(new Book());
+                return bookDetails;
             }
         });
 
