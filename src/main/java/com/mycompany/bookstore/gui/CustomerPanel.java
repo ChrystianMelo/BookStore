@@ -4,10 +4,11 @@
  */
 package com.mycompany.bookstore.gui;
 
+import com.mycompany.bookstore.Book;
 import com.mycompany.bookstore.BookStore;
 import com.mycompany.bookstore.Customer;
 import java.awt.FlowLayout;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -21,11 +22,16 @@ public class CustomerPanel extends javax.swing.JPanel {
         initComponents();
 
         allBooksPane.setLayout(new FlowLayout());
-        allBooksPane.add(new BookList(store, new ArrayList<>(store.getAvailableBooks().keySet())));
+        allBooksPane.add(new BookList(store, store.getAvailableBooks()));
 
         starredBooksPane.setLayout(new FlowLayout());
+
         Customer customer = (Customer) store.getUser();
-        starredBooksPane.add(new BookList(store, customer.getFavorites()));
+        HashMap<Book, Integer> hashMap = new HashMap<>();
+        for (Book b : customer.getFavorites()) {
+            hashMap.put(b, 1);
+        }
+        starredBooksPane.add(new BookList(store, hashMap));
     }
 
     /**

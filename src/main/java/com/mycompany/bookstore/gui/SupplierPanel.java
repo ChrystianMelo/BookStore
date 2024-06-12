@@ -7,7 +7,7 @@ package com.mycompany.bookstore.gui;
 import com.mycompany.bookstore.BookStore;
 import com.mycompany.bookstore.Supplier;
 import java.awt.FlowLayout;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -21,12 +21,12 @@ public class SupplierPanel extends javax.swing.JPanel {
         initComponents();
 
         salesPane.setLayout(new FlowLayout());
-        BookList bookList1 = new BookList(store, new ArrayList<>());
+        BookList bookList1 = new BookList(store, new HashMap<>());
         salesPane.add(bookList1);
 
         stockPane.setLayout(new FlowLayout());
         Supplier supplier = (Supplier) store.getUser();
-        BookList bookList2 = new BookList(store, new ArrayList<>(supplier.getEstoque().keySet()));
+        BookList bookList2 = new BookList(store, supplier.getEstoque());
         stockPane.add(bookList2);
     }
 

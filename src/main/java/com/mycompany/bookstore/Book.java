@@ -38,11 +38,6 @@ public class Book {
     /**
      *
      */
-    private int quantity;
-
-    /**
-     *
-     */
     private Supplier supplier;
 
     /**
@@ -58,7 +53,6 @@ public class Book {
         details = "Empty";
         name = "Unknown";
         value = -1;
-        quantity = 0;
         cover = new javax.swing.ImageIcon(getClass().getResource("/icon50x50.png"));
     }
 
@@ -75,7 +69,6 @@ public class Book {
         this.details = details;
         this.name = name;
         this.value = value;
-        this.quantity = 1;
         this.cover = new javax.swing.ImageIcon(getClass().getResource("/icon50x50.png"));;
     }
 
@@ -86,15 +79,13 @@ public class Book {
      * @param name Nome do livro.
      * @param value Valor do livro.
      * @param details Detalhes do livro.
-     * @param quantity Quantidade de livro.
      * @param cover Capa do livro.
      */
-    public Book(int id, String name, float value, String details, int quantity, ImageIcon cover) {
+    public Book(int id, String name, float value, String details, ImageIcon cover) {
         this.id = id;
         this.details = details;
         this.name = name;
         this.value = value;
-        this.quantity = quantity;
         this.cover = cover;
     }
 
@@ -177,20 +168,6 @@ public class Book {
      */
     public void setDetails(String details) {
         this.details = details;
-    }
-
-    /**
-     *
-     */
-    public int getQuantity() {
-        return quantity;
-    }
-
-    /**
-     *
-     */
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     /**

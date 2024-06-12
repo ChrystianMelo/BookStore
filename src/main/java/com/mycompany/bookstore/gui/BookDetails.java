@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,9 +35,9 @@ public class BookDetails extends javax.swing.JPanel {
     /**
      * Creates new form BookDetails
      */
-    public BookDetails(BookStore store, Book book) {
+    public BookDetails(BookStore store, Map.Entry<Book, Integer> entry) {
         this.store = store;
-        this.book = book;
+        this.book = entry.getKey();
 
         initComponents();
 
@@ -62,7 +63,7 @@ public class BookDetails extends javax.swing.JPanel {
         });
 
         titleLabel.setText(book.getName());
-        quantityLabel.setText(String.valueOf(book.getQuantity()));
+        quantityLabel.setText(String.valueOf(entry.getValue()));
         supplierLabel.setText("By Amazon");
         valueLabel1.setText(String.valueOf(book.getValue()));
 

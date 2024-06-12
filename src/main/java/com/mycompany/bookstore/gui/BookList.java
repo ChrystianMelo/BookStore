@@ -12,7 +12,8 @@ import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
@@ -25,12 +26,12 @@ public class BookList extends javax.swing.JPanel {
     /**
      * Creates new form BookList
      */
-    public BookList(BookStore store, ArrayList<Book> books) {
+    public BookList(BookStore store, HashMap<Book, Integer> books) {
         initComponents();
 
         DefaultListModel<BookDetails> listModel = new DefaultListModel<>();
-        for (Book b : books) {
-            listModel.addElement(new BookDetails(store, b));
+        for (Map.Entry entry : books.entrySet()) {
+            listModel.addElement(new BookDetails(store, entry));
         }
 
         FlowLayout layoyt = new FlowLayout();

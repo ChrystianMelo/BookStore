@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -143,7 +142,7 @@ public class BookStoreGUI extends javax.swing.JFrame {
                 dialog.setLocationRelativeTo(BookStoreGUI.this);
                 dialog.setLayout(new FlowLayout());
                 dialog.setSize(500, 400);
-                dialog.add(new BookList(store, new ArrayList<>(customer.getCart().getBooks().keySet())));
+                dialog.add(new BookList(store, customer.getCart().getBooks()));
 
                 dialog.setVisible(true);
             }
