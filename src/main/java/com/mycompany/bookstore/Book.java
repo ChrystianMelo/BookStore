@@ -3,39 +3,58 @@
  */
 package com.mycompany.bookstore;
 
+import javax.swing.ImageIcon;
+
 /**
  * Classe que representa um livro.
  */
 public class Book {
 
     /**
+     * Contador de ID.
+     */
+    private static int counter = 0;
+
+    /**
      * Identificador único do livro.
      */
-    int id;
+    private int id;
 
     /**
      * Nome do livro.
      */
-    String name;
+    private String name;
 
     /**
      * Valor do livro.
      */
-    float value;
+    private float value;
 
     /**
      * Detalhes adicionais sobre o livro.
      */
-    String details;
+    private String details;
+
+    /**
+     *
+     */
+    private int quantity;
+
+    /**
+     *
+     */
+    private ImageIcon cover;
 
     /**
      * Construtor padrão que inicializa um livro com valores padrão.
      */
     public Book() {
-        id = -1;
+        id = ++counter;
         details = "Empty";
         name = "Unknown";
         value = -1;
+        quantity = 0;
+        cover = new javax.swing.ImageIcon(getClass().getResource("/icon50x50.png"));
     }
 
     /**
@@ -51,6 +70,27 @@ public class Book {
         this.details = details;
         this.name = name;
         this.value = value;
+        this.quantity = 1;
+        this.cover = new javax.swing.ImageIcon(getClass().getResource("/icon50x50.png"));;
+    }
+
+    /**
+     * Construtor que inicializa um livro com valores especificados.
+     *
+     * @param id Identificador do livro.
+     * @param name Nome do livro.
+     * @param value Valor do livro.
+     * @param details Detalhes do livro.
+     * @param quantity Quantidade de livro.
+     * @param cover Capa do livro.
+     */
+    public Book(int id, String name, float value, String details, int quantity, ImageIcon cover) {
+        this.id = id;
+        this.details = details;
+        this.name = name;
+        this.value = value;
+        this.quantity = quantity;
+        this.cover = cover;
     }
 
     @Override
@@ -132,5 +172,12 @@ public class Book {
      */
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    /**
+     *
+     */
+    public int getQuantity() {
+        return quantity;
     }
 }

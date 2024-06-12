@@ -21,11 +21,11 @@ public class CustomerPanel extends javax.swing.JPanel {
         initComponents();
 
         allBooksPane.setLayout(new FlowLayout());
-        allBooksPane.add(new BookList(new ArrayList<>(store.getAvailableBooks().keySet())));
+        allBooksPane.add(new BookList(store, new ArrayList<>(store.getAvailableBooks().keySet())));
 
         starredBooksPane.setLayout(new FlowLayout());
         Customer customer = (Customer) store.getUser();
-        starredBooksPane.add(new BookList(customer.getFavorites()));
+        starredBooksPane.add(new BookList(store, customer.getFavorites()));
     }
 
     /**

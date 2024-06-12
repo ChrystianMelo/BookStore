@@ -21,11 +21,13 @@ public class SupplierPanel extends javax.swing.JPanel {
         initComponents();
 
         salesPane.setLayout(new FlowLayout());
-        salesPane.add(new BookList(new ArrayList<>()));
+        BookList bookList1 = new BookList(store, new ArrayList<>());
+        salesPane.add(bookList1);
 
         stockPane.setLayout(new FlowLayout());
         Supplier supplier = (Supplier) store.getUser();
-        stockPane.add(new BookList(new ArrayList<>(supplier.getEstoque().keySet())));
+        BookList bookList2 = new BookList(store, new ArrayList<>(supplier.getEstoque().keySet()));
+        stockPane.add(bookList2);
     }
 
     /**

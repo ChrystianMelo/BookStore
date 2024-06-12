@@ -17,15 +17,24 @@ import javax.swing.ListCellRenderer;
  */
 public class BookList extends javax.swing.JPanel {
 
+    BookStore store;
+
     /**
      * Creates new form BookList
      */
-    public BookList(ArrayList<Book> books) {
+    public BookList(BookStore store, ArrayList<Book> books) {
         initComponents();
 
+        this.store = store;
+
+        ArrayList<BookDetails> booksD = new ArrayList();
+        books.forEach((Book b) -> {
+            booksD.add(new BookDetails(store, b));
+        });
+
         DefaultListModel<BookDetails> listModel = new DefaultListModel<>();
-        for (Book b : books) {
-            listModel.addElement(new BookDetails(b));
+        for (BookDetails b : booksD) {
+            listModel.addElement(b);
         }
 
         FlowLayout layoyt = new FlowLayout();
@@ -60,6 +69,10 @@ public class BookList extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(500, 315));
         setPreferredSize(new java.awt.Dimension(500, 315));
 
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jList2.setDoubleBuffered(true);
         jList2.setMaximumSize(new java.awt.Dimension(500, 315));
         jList2.setMinimumSize(new java.awt.Dimension(500, 315));
         jList2.setPreferredSize(new java.awt.Dimension(500, 315));

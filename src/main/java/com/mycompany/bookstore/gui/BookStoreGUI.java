@@ -56,23 +56,16 @@ public class BookStoreGUI extends javax.swing.JFrame {
 
     @Override
     public void repaint() {
-
         if (store.getUser() instanceof Customer) {
             userPanel = new CustomerPanel(store);
 
             stockBtnLabel.setVisible(false);
-            stockBtnLabel.setOpaque(false);
-
             cartIBtnLabel.setVisible(true);
-            cartIBtnLabel.setOpaque(true);
         } else {
             userPanel = new SupplierPanel(store);
 
             stockBtnLabel.setVisible(true);
-            stockBtnLabel.setOpaque(true);
-
             cartIBtnLabel.setVisible(false);
-            cartIBtnLabel.setOpaque(false);
         }
 
         contentPane.removeAll();
@@ -125,7 +118,7 @@ public class BookStoreGUI extends javax.swing.JFrame {
                 JDialog dialog = new JDialog(BookStoreGUI.this, "Cart", true);
                 dialog.setLayout(new FlowLayout());
                 dialog.setSize(500, 400);
-                dialog.add(new BookList(new ArrayList<>(customer.getCart().getBooks().keySet())));
+                dialog.add(new BookList(store, new ArrayList<>(customer.getCart().getBooks().keySet())));
 
                 dialog.setVisible(true);
             }
