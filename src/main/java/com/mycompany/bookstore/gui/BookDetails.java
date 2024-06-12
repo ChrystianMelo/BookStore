@@ -8,12 +8,13 @@ import com.mycompany.bookstore.Book;
 import com.mycompany.bookstore.BookStore;
 import com.mycompany.bookstore.Customer;
 import com.mycompany.bookstore.User;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -38,6 +39,27 @@ public class BookDetails extends javax.swing.JPanel {
         this.book = book;
 
         initComponents();
+
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Point p = e.getPoint();
+
+                // Reaja com base no componente clicado
+                if (starLabel.getBounds().contains(p)) {
+                    for (MouseListener l : starLabel.getMouseListeners()) {
+                        l.mouseClicked(e);
+                    }
+                } else if (cartLabel.getBounds().contains(new Point(p.x - jPanel1.getWidth(), p.y))) {
+                    for (MouseListener l : cartLabel.getMouseListeners()) {
+                        l.mouseClicked(e);
+                    }
+                } else {
+                    System.out.println("Book detail clicked");
+                }
+
+            }
+        });
 
         titleLabel.setText(book.getName());
         quantityLabel.setText(String.valueOf(book.getQuantity()));
@@ -82,6 +104,7 @@ public class BookDetails extends javax.swing.JPanel {
     }
 
     @Override
+
     public void repaint() {
         if (store != null) { //BUG Fixes
             User user = store.getUser();

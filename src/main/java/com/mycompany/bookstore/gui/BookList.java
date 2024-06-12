@@ -7,6 +7,11 @@ package com.mycompany.bookstore.gui;
 import com.mycompany.bookstore.*;
 import java.awt.Component;
 import java.awt.FlowLayout;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -33,6 +38,37 @@ public class BookList extends javax.swing.JPanel {
         jList2.setLayout(layoyt);
 
         jList2.setModel(listModel);
+
+        jList2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JList<BookDetails> list = (JList<BookDetails>) e.getSource();
+                int index = list.locationToIndex(e.getPoint());
+                if (index != -1) {
+                    BookDetails item = list.getModel().getElementAt(index);
+                    assert (item != null);
+
+                    // Traduz o ponto de clique para as coordenadas do item
+                    Rectangle cellBounds = list.getCellBounds(index, index);
+                    Point itemPoint = new Point(e.getX() - cellBounds.x, e.getY() - cellBounds.y);
+                    MouseEvent itemEvent = new MouseEvent(
+                            item,
+                            e.getID(),
+                            e.getWhen(),
+                            e.getModifiers(),
+                            itemPoint.x,
+                            itemPoint.y,
+                            e.getClickCount(),
+                            e.isPopupTrigger()
+                    );
+
+                    for (MouseListener l : item.getMouseListeners()) {
+                        l.mouseClicked(itemEvent);
+                    }
+                }
+            }
+        });
+
         jList2.setCellRenderer(new ListCellRenderer<BookDetails>() {
             @Override
             public Component getListCellRendererComponent(JList<? extends BookDetails> list, BookDetails bookDetails, int index, boolean isSelected, boolean cellHasFocus) {
