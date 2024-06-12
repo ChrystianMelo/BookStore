@@ -100,11 +100,7 @@ public class BookDetails extends javax.swing.JPanel {
                 cartLabel.setVisible(true);
 
                 boolean isStarred = ((Customer) user).getFavorites().contains(book);
-                if (isStarred) {
-                    starLabel.setIcon(starFilled);
-                } else {
-                    starLabel.setIcon(star);
-                }
+                starLabel.setEnabled(isStarred);
             } else {
                 starLabel.setVisible(false);
                 cartLabel.setVisible(false);
@@ -148,8 +144,10 @@ public class BookDetails extends javax.swing.JPanel {
         titleLabel.setText("Title");
         jPanel1.add(titleLabel);
 
-        starLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/star24x24.png"))); // NOI18N
+        starLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/starFilled24x24.png"))); // NOI18N
         starLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        starLabel.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/star24x24.png"))); // NOI18N
+        starLabel.setEnabled(false);
         jPanel1.add(starLabel);
 
         add(jPanel1, new java.awt.GridBagConstraints());
@@ -157,7 +155,7 @@ public class BookDetails extends javax.swing.JPanel {
         jPanel2.setMaximumSize(new java.awt.Dimension(250, 50));
         jPanel2.setMinimumSize(new java.awt.Dimension(250, 50));
         jPanel2.setPreferredSize(new java.awt.Dimension(250, 50));
-        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.TRAILING));
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
 
         quantityLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         quantityLabel.setText("1");
