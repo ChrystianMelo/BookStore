@@ -43,6 +43,11 @@ public class Book {
     /**
      *
      */
+    private Supplier supplier;
+
+    /**
+     *
+     */
     private ImageIcon cover;
 
     /**
@@ -180,4 +185,40 @@ public class Book {
     public int getQuantity() {
         return quantity;
     }
+
+    /**
+     *
+     */
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    /**
+     *
+     */
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    /**
+     *
+     */
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
+
+    /**
+     *
+     */
+    public ImageIcon getCover() {
+        return cover;
+    }
+
+    /**
+     *
+     */
+    public void setCover(ImageIcon cover) {
+        this.cover = cover;
+    }
+
 }

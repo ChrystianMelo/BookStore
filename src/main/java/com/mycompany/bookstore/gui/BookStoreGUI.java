@@ -17,6 +17,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -160,10 +161,10 @@ public class BookStoreGUI extends javax.swing.JFrame {
                 login.setLocationRelativeTo(BookStoreGUI.this);
                 login.setVisible(true);
 
-                Book book = login.getBook();
+                Map.Entry<Book, Integer> book = login.getBook();
                 if (book != null) {
                     try {
-                        supplier.registerBook(book, 1);
+                        supplier.registerBook(book.getKey(), book.getValue());
                     } catch (Exception ex) {
                         Logger.getLogger(BookStoreGUI.class.getName()).log(Level.SEVERE, null, ex);
                     }

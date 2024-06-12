@@ -5,6 +5,8 @@
 package com.mycompany.bookstore.gui;
 
 import com.mycompany.bookstore.Book;
+import java.util.AbstractMap;
+import java.util.Map;
 
 /**
  *
@@ -17,6 +19,11 @@ public class BookRegisterDialog extends javax.swing.JDialog {
     private Book book = null;
 
     /**
+     *
+     */
+    private int quantity = -1;
+
+    /**
      * Creates new form BookRegister
      */
     public BookRegisterDialog(java.awt.Frame parent, boolean modal) {
@@ -27,8 +34,8 @@ public class BookRegisterDialog extends javax.swing.JDialog {
     /**
      *
      */
-    public Book getBook() {
-        return book;
+    public Map.Entry<Book, Integer> getBook() {
+        return new AbstractMap.SimpleEntry<>(book, quantity);
     }
 
     /**
@@ -42,9 +49,19 @@ public class BookRegisterDialog extends javax.swing.JDialog {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        bookNameTextField = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        bookValueTextField1 = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        bookQuantityTextField = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        bookDetailsTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(400, 400));
@@ -56,26 +73,6 @@ public class BookRegisterDialog extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
         getContentPane().add(jLabel1, gridBagConstraints);
 
-        jLabel2.setText("Name");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
-        getContentPane().add(jLabel2, gridBagConstraints);
-
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("Name");
-        jTextField1.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jTextField1.setMaximumSize(new java.awt.Dimension(200, 20));
-        jTextField1.setMinimumSize(new java.awt.Dimension(200, 20));
-        jTextField1.setName(""); // NOI18N
-        jTextField1.setPreferredSize(new java.awt.Dimension(200, 20));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
-        getContentPane().add(jTextField1, gridBagConstraints);
-
         jButton1.setText("Register");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,23 +81,99 @@ public class BookRegisterDialog extends javax.swing.JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
         getContentPane().add(jButton1, gridBagConstraints);
+
+        jLabel2.setText("Name");
+        jPanel1.add(jLabel2);
+
+        bookNameTextField.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        bookNameTextField.setMaximumSize(new java.awt.Dimension(200, 20));
+        bookNameTextField.setMinimumSize(new java.awt.Dimension(200, 20));
+        bookNameTextField.setName(""); // NOI18N
+        bookNameTextField.setPreferredSize(new java.awt.Dimension(200, 20));
+        jPanel1.add(bookNameTextField);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        getContentPane().add(jPanel1, gridBagConstraints);
+
+        jLabel5.setText("Value");
+        jPanel4.add(jLabel5);
+
+        bookValueTextField1.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        bookValueTextField1.setMaximumSize(new java.awt.Dimension(200, 20));
+        bookValueTextField1.setMinimumSize(new java.awt.Dimension(200, 20));
+        bookValueTextField1.setName(""); // NOI18N
+        bookValueTextField1.setPreferredSize(new java.awt.Dimension(200, 20));
+        jPanel4.add(bookValueTextField1);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        getContentPane().add(jPanel4, gridBagConstraints);
+
+        jLabel3.setText("Quantity");
+        jPanel2.add(jLabel3);
+
+        bookQuantityTextField.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        bookQuantityTextField.setMaximumSize(new java.awt.Dimension(200, 20));
+        bookQuantityTextField.setMinimumSize(new java.awt.Dimension(200, 20));
+        bookQuantityTextField.setName(""); // NOI18N
+        bookQuantityTextField.setPreferredSize(new java.awt.Dimension(200, 20));
+        jPanel2.add(bookQuantityTextField);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        getContentPane().add(jPanel2, gridBagConstraints);
+
+        jLabel4.setText("Details");
+        jPanel3.add(jLabel4);
+
+        bookDetailsTextField.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        bookDetailsTextField.setMaximumSize(new java.awt.Dimension(200, 60));
+        bookDetailsTextField.setMinimumSize(new java.awt.Dimension(200, 60));
+        bookDetailsTextField.setName(""); // NOI18N
+        bookDetailsTextField.setOpaque(true);
+        bookDetailsTextField.setPreferredSize(new java.awt.Dimension(200, 60));
+        jPanel3.add(bookDetailsTextField);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        getContentPane().add(jPanel3, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         book = new Book();
-        book.setName(jTextField1.getText());
+        book.setName(bookNameTextField.getText());
+        book.setValue(Integer.parseInt(bookValueTextField1.getText()));
+        book.setDetails(bookDetailsTextField.getText());
+
+        quantity = (Integer.parseInt(bookQuantityTextField.getText()));
+
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField bookDetailsTextField;
+    private javax.swing.JTextField bookNameTextField;
+    private javax.swing.JTextField bookQuantityTextField;
+    private javax.swing.JTextField bookValueTextField1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 }
