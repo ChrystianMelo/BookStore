@@ -17,24 +17,15 @@ import javax.swing.ListCellRenderer;
  */
 public class BookList extends javax.swing.JPanel {
 
-    BookStore store;
-
     /**
      * Creates new form BookList
      */
     public BookList(BookStore store, ArrayList<Book> books) {
         initComponents();
 
-        this.store = store;
-
-        ArrayList<BookDetails> booksD = new ArrayList();
-        books.forEach((Book b) -> {
-            booksD.add(new BookDetails(store, b));
-        });
-
         DefaultListModel<BookDetails> listModel = new DefaultListModel<>();
-        for (BookDetails b : booksD) {
-            listModel.addElement(b);
+        for (Book b : books) {
+            listModel.addElement(new BookDetails(store, b));
         }
 
         FlowLayout layoyt = new FlowLayout();
