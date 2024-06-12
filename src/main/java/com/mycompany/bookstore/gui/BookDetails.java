@@ -31,16 +31,6 @@ public class BookDetails extends javax.swing.JPanel {
     private final Book book;
 
     /**
-     *
-     */
-    private final ImageIcon star = new javax.swing.ImageIcon(getClass().getResource("/star24x24.png"));
-
-    /**
-     *
-     */
-    private final ImageIcon starFilled = new javax.swing.ImageIcon(getClass().getResource("/starFilled24x24.png"));
-
-    /**
      * Creates new form BookDetails
      */
     public BookDetails(BookStore store, Book book) {
