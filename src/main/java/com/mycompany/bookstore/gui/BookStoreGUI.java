@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -84,6 +85,7 @@ public class BookStoreGUI extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 LoginDialog login = new LoginDialog(BookStoreGUI.this, true);
+                login.setLocationRelativeTo(BookStoreGUI.this);
                 login.setVisible(true);
 
                 User user = login.getUser();
@@ -116,6 +118,7 @@ public class BookStoreGUI extends javax.swing.JFrame {
                 Customer customer = (Customer) user;
 
                 JDialog dialog = new JDialog(BookStoreGUI.this, "Cart", true);
+                dialog.setLocationRelativeTo(BookStoreGUI.this);
                 dialog.setLayout(new FlowLayout());
                 dialog.setSize(500, 400);
                 dialog.add(new BookList(store, new ArrayList<>(customer.getCart().getBooks().keySet())));
@@ -133,6 +136,7 @@ public class BookStoreGUI extends javax.swing.JFrame {
                 Supplier supplier = (Supplier) user;
 
                 BookRegisterDialog login = new BookRegisterDialog(BookStoreGUI.this, true);
+                login.setLocationRelativeTo(BookStoreGUI.this);
                 login.setVisible(true);
 
                 Book book = login.getBook();
@@ -152,6 +156,13 @@ public class BookStoreGUI extends javax.swing.JFrame {
         searchBtnLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                JDialog dialog = new JDialog(BookStoreGUI.this, "ERROR", true);
+                dialog.setLocationRelativeTo(BookStoreGUI.this);
+                dialog.setLayout(new FlowLayout());
+                dialog.setSize(400, 100);
+                dialog.add(new JLabel("Por enquanto não é possivel fazer pesquisa."));
+
+                dialog.setVisible(true);
                 //userPanel.setFilter(null);
             }
         });
