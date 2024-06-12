@@ -7,8 +7,11 @@ package com.mycompany.bookstore.gui;
 import com.mycompany.bookstore.*;
 import java.awt.Desktop;
 import java.awt.FlowLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -81,6 +84,24 @@ public class BookStoreGUI extends javax.swing.JFrame {
      *
      */
     private void addListeners() {
+        searchTextField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    for (MouseListener l : searchBtnLabel.getMouseListeners()) {
+                        l.mouseClicked(null);
+                    }
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
         userBtnLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -293,32 +314,22 @@ public class BookStoreGUI extends javax.swing.JFrame {
         searchPane.setMaximumSize(new java.awt.Dimension(500, 20));
         searchPane.setMinimumSize(new java.awt.Dimension(500, 20));
         searchPane.setPreferredSize(new java.awt.Dimension(500, 20));
-        searchPane.setLayout(new java.awt.GridBagLayout());
+        searchPane.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 0, 0));
 
-        searchTextField.setText("Search...");
-        searchTextField.setAutoscrolls(false);
-        searchTextField.setInheritsPopupMenu(true);
-        searchTextField.setKeymap(null);
+        searchTextField.setText("Username");
         searchTextField.setMargin(new java.awt.Insets(0, 0, 0, 0));
         searchTextField.setMaximumSize(new java.awt.Dimension(480, 20));
         searchTextField.setMinimumSize(new java.awt.Dimension(480, 20));
+        searchTextField.setName(""); // NOI18N
         searchTextField.setPreferredSize(new java.awt.Dimension(480, 20));
-        searchTextField.setRequestFocusEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        searchPane.add(searchTextField, gridBagConstraints);
+        searchPane.add(searchTextField);
 
         searchBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search20x20.png"))); // NOI18N
         searchBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         searchBtnLabel.setMaximumSize(new java.awt.Dimension(20, 20));
         searchBtnLabel.setMinimumSize(new java.awt.Dimension(20, 20));
         searchBtnLabel.setPreferredSize(new java.awt.Dimension(20, 20));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        searchPane.add(searchBtnLabel, gridBagConstraints);
+        searchPane.add(searchBtnLabel);
 
         bodyPane.add(searchPane, new java.awt.GridBagConstraints());
 
