@@ -83,7 +83,6 @@ public class LoginDialog extends javax.swing.JDialog {
         getContentPane().add(usernameLabel, gridBagConstraints);
 
         passwordField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        passwordField.setText("jPasswordField1");
         passwordField.setMargin(new java.awt.Insets(0, 0, 0, 0));
         passwordField.setMaximumSize(new java.awt.Dimension(200, 20));
         passwordField.setMinimumSize(new java.awt.Dimension(200, 20));
@@ -100,7 +99,6 @@ public class LoginDialog extends javax.swing.JDialog {
         getContentPane().add(passwordField, gridBagConstraints);
 
         usernameTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        usernameTextField.setText("Username");
         usernameTextField.setMargin(new java.awt.Insets(0, 0, 0, 0));
         usernameTextField.setMaximumSize(new java.awt.Dimension(200, 20));
         usernameTextField.setMinimumSize(new java.awt.Dimension(200, 20));
@@ -122,7 +120,6 @@ public class LoginDialog extends javax.swing.JDialog {
         choice1.setMaximumSize(new java.awt.Dimension(100, 20));
         choice1.setMinimumSize(new java.awt.Dimension(100, 20));
         choice1.setName("--Select--"); // NOI18N
-        choice1.setPreferredSize(new java.awt.Dimension(100, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;

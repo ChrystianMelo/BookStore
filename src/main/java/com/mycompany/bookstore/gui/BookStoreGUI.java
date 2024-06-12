@@ -316,7 +316,6 @@ public class BookStoreGUI extends javax.swing.JFrame {
         searchPane.setPreferredSize(new java.awt.Dimension(500, 20));
         searchPane.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 0, 0));
 
-        searchTextField.setText("Username");
         searchTextField.setMargin(new java.awt.Insets(0, 0, 0, 0));
         searchTextField.setMaximumSize(new java.awt.Dimension(480, 20));
         searchTextField.setMinimumSize(new java.awt.Dimension(480, 20));
