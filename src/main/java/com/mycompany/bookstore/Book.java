@@ -36,7 +36,7 @@ public class Book {
     private String details;
 
     /**
-     * Vendedor
+     * Iniciando vendedor
      */
     private Supplier supplier;
 
