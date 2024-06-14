@@ -60,4 +60,4 @@ jobs:
       with:
         name: JaCoCo coverage
         path: jacoco.xml
-        reporter: jacoco1
+        reporter: jacoco
