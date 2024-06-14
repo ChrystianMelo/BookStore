@@ -8,6 +8,8 @@ import com.mycompany.bookstore.BookStore;
 import com.mycompany.bookstore.Supplier;
 import java.awt.FlowLayout;
 import java.util.HashMap;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
@@ -20,14 +22,41 @@ public class SupplierPanel extends javax.swing.JPanel {
     public SupplierPanel(BookStore store) {
         initComponents();
 
+        tabbedPane.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                switch (tabbedPane.getSelectedIndex()) {
+                    case 0: // Sales
+                        salesPane.removeAll();
+                        salesPane.add(new BookList(store, new HashMap<>()));
+
+                        salesPane.revalidate();
+                        salesPane.repaint();
+
+                        break;
+                    case 1: // Stock
+                        stockPane.removeAll();
+                        stockPane.add(new BookList(store, ((Supplier) store.getUser()).getEstoque()));
+
+                        stockPane.revalidate();
+                        stockPane.repaint();
+
+                        break;
+                    case 2: // Stats
+                        // Nada ainda.
+                        break;
+                    default:
+                        // Não deve chegar aqui.
+                        break;
+                }
+            }
+        });
+
         salesPane.setLayout(new FlowLayout());
-        BookList bookList1 = new BookList(store, new HashMap<>());
-        salesPane.add(bookList1);
+        salesPane.add(new BookList(store, new HashMap<>()));
 
         stockPane.setLayout(new FlowLayout());
-        Supplier supplier = (Supplier) store.getUser();
-        BookList bookList2 = new BookList(store, supplier.getEstoque());
-        stockPane.add(bookList2);
+        stockPane.add(new BookList(store, ((Supplier) store.getUser()).getEstoque()));
     }
 
     /**

@@ -9,6 +9,8 @@ import com.mycompany.bookstore.BookStore;
 import com.mycompany.bookstore.Customer;
 import java.awt.FlowLayout;
 import java.util.HashMap;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
@@ -20,6 +22,39 @@ public class CustomerPanel extends javax.swing.JPanel {
      */
     public CustomerPanel(BookStore store) {
         initComponents();
+
+        tabbedPane.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                switch (tabbedPane.getSelectedIndex()) {
+                    case 0: // All books
+                        allBooksPane.removeAll();
+                        allBooksPane.add(new BookList(store, store.getAvailableBooks()));
+
+                        allBooksPane.revalidate();
+                        allBooksPane.repaint();
+
+                        break;
+                    case 1: // Starred books
+                        Customer customer = (Customer) store.getUser();
+                        HashMap<Book, Integer> hashMap = new HashMap<>();
+                        for (Book b : customer.getFavorites()) {
+                            hashMap.put(b, 1);
+                        }
+
+                        starredBooksPane.removeAll();
+                        starredBooksPane.add(new BookList(store, hashMap));
+
+                        starredBooksPane.revalidate();
+                        starredBooksPane.repaint();
+
+                        break;
+                    default:
+                        // Não deve chegar aqui.
+                        break;
+                }
+            }
+        });
 
         allBooksPane.setLayout(new FlowLayout());
         allBooksPane.add(new BookList(store, store.getAvailableBooks()));
