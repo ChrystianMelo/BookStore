@@ -53,11 +53,3 @@ jobs:
       with:
         name: jacoco-report
         path: target/site/jacoco/
-
-    - name: Comment coverage report
-      uses: dorny/test-reporter@v1
-      if: always()
-      with:
-        name: jacoco
-        path: jacoco.xml
-        reporter: jacoco
