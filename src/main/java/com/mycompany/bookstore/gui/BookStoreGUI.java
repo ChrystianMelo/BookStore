@@ -35,7 +35,7 @@ public class BookStoreGUI extends javax.swing.JFrame {
     private final BookStore store;
 
     /**
-     *
+     * Painel central do usuário.
      */
     private JPanel userPanel;
 
