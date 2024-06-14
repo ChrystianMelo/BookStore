@@ -58,6 +58,6 @@ jobs:
       uses: dorny/test-reporter@v1
       if: always()
       with:
-        name: JaCoCo coverage
+        name: jacoco
         path: jacoco.xml
-        reporter: jacoco-report
+        reporter: jacoco
