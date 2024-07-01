@@ -23,7 +23,7 @@ public class Supplier extends User {
      * @param name Nome do fornecedor.
      * @param adress Endereço do fornecedor.
      */
-    public Supplier(String username, String name, Address adress) {
+    public Supplier(String username, String name, String adress) {
         super(username, name, adress);
         estoque = new HashMap<>();
     }
@@ -37,7 +37,7 @@ public class Supplier extends User {
      * @param adress Endereço do fornecedor.
      * @param estoque Estoque inicial do fornecedor.
      */
-    public Supplier(String username, String name, Address adress, HashMap<Book, Integer> estoque) {
+    public Supplier(String username, String name, String adress, HashMap<Book, Integer> estoque) {
         super(username, name, adress);
         this.estoque = estoque;
     }

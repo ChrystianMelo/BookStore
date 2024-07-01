@@ -4,7 +4,6 @@
  */
 package com.mycompany.bookstore.gui;
 
-import com.mycompany.bookstore.Address;
 import com.mycompany.bookstore.Customer;
 import com.mycompany.bookstore.Supplier;
 import com.mycompany.bookstore.User;
@@ -149,9 +148,9 @@ public class LoginDialog extends javax.swing.JDialog {
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         if (choice1.getSelectedItem() == "Customer") {
-            user = new Customer(usernameTextField.getText(), usernameTextField.getText(), new Address("Street", 123, "Neighborhood", "City", "State", "Country", "Complement"));
+            user = new Customer(usernameTextField.getText(), usernameTextField.getText(), "Street" + "Neighborhood" + "City" + "State" + "Country" + "Complement");
         } else {
-            user = new Supplier(usernameTextField.getText(), usernameTextField.getText(), new Address("Street", 123, "Neighborhood", "City", "State", "Country", "Complement"));
+            user = new Supplier(usernameTextField.getText(), usernameTextField.getText(), "Street" + "Neighborhood" + "City" + "State" + "Country" + "Complement");
         }
         dispose();
     }//GEN-LAST:event_okButtonActionPerformed

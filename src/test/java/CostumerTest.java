@@ -1,5 +1,4 @@
 
-import com.mycompany.bookstore.Address;
 import com.mycompany.bookstore.Book;
 import com.mycompany.bookstore.Customer;
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,7 +11,7 @@ public class CostumerTest {
 
     @BeforeEach
     public void setUp() {
-        Address address = new Address("Street", 123, "Neighborhood", "City", "State", "Country", "Complement");
+        String address = "Street" + "Neighborhood" + "City" + "State" + "Country" + "Complement";
         costumer = new Customer("username", "Costumer Name", address);
     }
 
