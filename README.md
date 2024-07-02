@@ -2,7 +2,6 @@
 
 ## Membros do Grupo
 - Chrystian Paulo Ferreira de Melo
-- Lucas Xavier Veneroso
 - Sanny Cristiane Moreira de Sales
 
 ## Descrição do Sistema
