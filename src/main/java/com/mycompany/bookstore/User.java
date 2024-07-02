@@ -37,6 +37,24 @@ public class User {
         this.adress = adress;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        return username.equals(((User) obj).getUsername());
+    }
+
+    @Override
+    public int hashCode() {
+        return username.hashCode();
+    }
+
     /**
      * Define o nome real do usuário.
      *

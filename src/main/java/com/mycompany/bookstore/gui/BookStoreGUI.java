@@ -5,6 +5,7 @@
 package com.mycompany.bookstore.gui;
 
 import com.mycompany.bookstore.*;
+import com.mycompany.bookstore.db.BookStoreDatabaseUtils;
 import java.awt.Desktop;
 import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
@@ -12,6 +13,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -56,6 +59,17 @@ public class BookStoreGUI extends javax.swing.JFrame {
         revalidate();
         repaint();
 
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    BookStoreDatabaseUtils.writeCustomers(store.getCostumers());
+                    BookStoreDatabaseUtils.writeSuppliers(store.getSuppliers());
+                } catch (URISyntaxException ex) {
+                    System.out.println("ERROR");
+                }
+            }
+        });
     }
 
     @Override

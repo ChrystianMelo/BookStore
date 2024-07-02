@@ -60,12 +60,26 @@ public class Customer extends User {
     }
 
     /**
+     *
+     */
+    public void addToCart(Book e) throws Exception {
+        cart.addItem(e, 1);
+    }
+
+    /**
      * Obtém a lista de livros favoritos do cliente.
      *
      * @return Lista de livros favoritos do cliente.
      */
     public ArrayList<Book> getFavorites() {
         return favorites;
+    }
+
+    /**
+     *
+     */
+    public void addFavorite(Book e) {
+        favorites.add(e);
     }
 
     /**
