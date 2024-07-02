@@ -1,5 +1,4 @@
 
-import com.mycompany.bookstore.Address;
 import com.mycompany.bookstore.Book;
 import com.mycompany.bookstore.InsufficientStockException;
 import com.mycompany.bookstore.Supplier;
@@ -14,11 +13,11 @@ import org.junit.jupiter.api.Test;
 public class SupplierTest {
 
     private Supplier supplier;
-    private Address address;
+    private String address;
 
     @BeforeEach
     public void setUp() {
-        address = new Address("Street", 123, "Neighborhood", "City", "State", "Country", "Complement");
+        address = "Street" + "Neighborhood" + "City" + "State" + "Country" + "Complement";
         supplier = new Supplier("username", "Supplier Name", address);
     }
 
@@ -143,5 +142,16 @@ public class SupplierTest {
         assertThrows(Exception.class, () -> {
             supplier.registerBook(book, -10);
         });
+    }
+
+    @Test
+    public void test48() {
+    }
+
+    @Test
+    public void test49() {
+    }
+
+    public void test50() {
     }
 }

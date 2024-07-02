@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
-import com.mycompany.bookstore.Address;
 import com.mycompany.bookstore.Customer;
 import com.mycompany.bookstore.Supplier;
 import com.mycompany.bookstore.User;
@@ -19,11 +18,11 @@ public class UserTest {
     private User user;
     private Customer costumer;
     private Supplier supplier;
-    private Address address;
+    private String address;
 
     @BeforeEach
     public void setUp() {
-        address = new Address("Street", 1, "Neightborhood", "City", "State", "Coountry", "12345");
+        address = "Street" + "Neighborhood" + "City" + "State" + "Country" + "Complement";
         user = new User("user1", "User One", address);
         costumer = new Customer("costumer1", "Costumer One", address);
         supplier = new Supplier("supplier1", "Supplier One", address);
@@ -60,7 +59,7 @@ public class UserTest {
 
     @Test
     public void testSetAdress() {
-        Address newAddress = new Address("New Street", 2, "New Neightborhood", "New City", "New State", "New Country", "67890");
+        String newAddress = "Street2" + "Neighborhood" + "City" + "State" + "Country" + "Complement";
         user.setAdress(newAddress);
         assertEquals(newAddress, user.getAdress());
     }

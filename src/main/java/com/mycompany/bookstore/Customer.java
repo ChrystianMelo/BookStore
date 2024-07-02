@@ -28,7 +28,7 @@ public class Customer extends User {
      * @param name Nome do cliente.
      * @param adress Endereço do cliente.
      */
-    public Customer(String username, String name, Address adress) {
+    public Customer(String username, String name, String adress) {
         super(username, name, adress);
         this.cart = new Cart();
         this.favorites = new ArrayList<>();
@@ -44,7 +44,7 @@ public class Customer extends User {
      * @param cart Carrinho do cliente.
      * @param favorites Lista de livros favoritos do cliente.
      */
-    public Customer(String username, String name, Address adress, Cart cart, ArrayList<Book> favorites) {
+    public Customer(String username, String name, String adress, Cart cart, ArrayList<Book> favorites) {
         super(username, name, adress);
         this.cart = cart;
         this.favorites = favorites;
@@ -60,12 +60,26 @@ public class Customer extends User {
     }
 
     /**
+     *
+     */
+    public void addToCart(Book e) throws Exception {
+        cart.addItem(e, 1);
+    }
+
+    /**
      * Obtém a lista de livros favoritos do cliente.
      *
      * @return Lista de livros favoritos do cliente.
      */
     public ArrayList<Book> getFavorites() {
         return favorites;
+    }
+
+    /**
+     *
+     */
+    public void addFavorite(Book e) {
+        favorites.add(e);
     }
 
     /**

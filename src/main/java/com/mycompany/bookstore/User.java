@@ -21,7 +21,7 @@ public class User {
     /**
      * Endereço do usuário.
      */
-    private Address adress;
+    private String adress;
 
     /**
      * Construtor que inicializa um usuário com nome de usuário, nome real e
@@ -31,10 +31,28 @@ public class User {
      * @param name Nome real do usuário.
      * @param adress Endereço do usuário.
      */
-    public User(String username, String name, Address adress) {
+    public User(String username, String name, String adress) {
         this.username = username;
         this.name = name;
         this.adress = adress;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        return username.equals(((User) obj).getUsername());
+    }
+
+    @Override
+    public int hashCode() {
+        return username.hashCode();
     }
 
     /**
@@ -51,7 +69,7 @@ public class User {
      *
      * @param adress Endereço do usuário.
      */
-    public void setAdress(Address adress) {
+    public void setAdress(String adress) {
         this.adress = adress;
     }
 
@@ -78,7 +96,7 @@ public class User {
      *
      * @return Endereço do usuário.
      */
-    public Address getAdress() {
+    public String getAdress() {
         return adress;
     }
 }
